@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import heroVideo from './assets/videos/hero-video.mp4';
+import logo from './assets/images/logo.png';
 
 
 // --- Helper Components ---
@@ -57,10 +58,10 @@ const ArticlePage = ({ article, onGoHome }) => {
         <div className="max-w-4xl mx-auto">
             <button
               onClick={onGoHome}
-              className="mb-8 inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors font-medium"
+              className="mb-8 cursor-pointer inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors font-medium"
             >
               <Icon path="M10 19l-7-7m0 0l7-7m-7 7h18" className="h-5 w-5 mr-2" />
-              Back to all articles
+              Back
             </button>
             <article>
               <p className="text-base font-semibold text-gray-600">{article.category}</p>
@@ -147,8 +148,8 @@ const Header = ({ setActiveSection, onGoHome, currentArticleId }) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <a href="#home" onClick={handleLogoClick} className={`font-bold text-xl transition-colors ${isOpaque ? 'text-gray-800' : 'text-white'}`}>
-              LegalLakrids
+            <a href="#home" onClick={handleLogoClick} className="block bg-white">
+              <img src={logo} alt="Legal Lakrids Logo" className={`h-14 w-auto background-white`} />
             </a>
           </div>
           <div className="hidden md:block">
@@ -202,36 +203,42 @@ const Header = ({ setActiveSection, onGoHome, currentArticleId }) => {
 
 const Hero = () => {
     const [videoError, setVideoError] = useState(false);
+    const videoRef = useRef(null);
 
-    // This is the fallback image URL from Unsplash
+    useEffect(() => {
+        // Set the playback speed once the video element is available
+        if (videoRef.current) {
+            videoRef.current.playbackRate = 0.8; // Play at 75% of the original speed
+        }
+    }, []);
+
     const fallbackImageUrl = "https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?q=80&w=2070&auto=format&fit=crop";
 
     return (
         <section 
             id="home" 
-            className="relative h-screen flex items-center justify-center text-center overflow-hidden bg-cover bg-center"
-            // Apply the fallback image via style if the video fails
+            className="relative h-screen flex items-center justify-center text-center overflow-hidden bg-center"
             style={videoError ? { backgroundImage: `url(${fallbackImageUrl})` } : {}}
         >
             {!videoError && (
                 <video
+                    ref={videoRef}
                     autoPlay
                     loop
                     muted
                     playsInline
-                    className="absolute z-0 w-auto min-w-full min-h-full max-w-none object-cover"
-                    // This event handler will trigger if the video fails to load
+                    className="absolute z-0 w-auto min-w-full min-h-full object-cover"
                     onError={() => setVideoError(true)}
                 >
                     <source src={heroVideo} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
             )}
-            <div className="absolute inset-0"></div>
+            <div className="absolute inset-0 bg-opacity-50"></div>
             <div className="relative container mx-auto px-4 z-10">
-                <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+                <div className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
                     Legal Lakrids
-                </h1>
+                </div>
                 <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
                     Your premier source for legal events, news, and analysis in Scandinavia.
                 </p>
@@ -255,18 +262,20 @@ const About = () => (
           <div>
             <img 
               className="rounded-lg shadow-lg object-cover w-full h-full" 
-              src="https://images.unsplash.com/photo-1521737852577-6848d7a1b9f8?q=80&w=2070&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1585399058947-f68f9db58e5f?q=80&w=2070&auto=format&fit=crop"
               alt="Team collaborating in a modern office"
               onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/e2e8f0/4a5568?text=Our+Team'; }}
             />
           </div>
-          <div className="prose prose-lg text-gray-600">
+          <div className="prose prose-lg text-gray-600 text-justify">
               <p>
                 Founded in Copenhagen, LegalLakrids was born from a desire to create a central platform for legal professionals across Denmark, Sweden, and Norway. We saw a need for high-quality, region-specific content and networking opportunities.
               </p>
+              <br />
               <p>
                 Our mission is to foster a connected and informed legal community. We achieve this by hosting premier events, publishing insightful articles from leading experts, and delivering timely news that impacts the Scandinavian legal sector.
               </p>
+              <br />
                <p>
                 Whether you're a seasoned partner, a rising associate, or an in-house counsel, LegalLakrids provides the resources and connections you need to excel.
               </p>
@@ -340,13 +349,6 @@ const Events = () => {
       location: 'Stockholm, Sweden',
       description: 'An exclusive event for in-house counsel to network and explore the challenges of modern corporate governance.',
       icon: <Icon path="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-1a6 6 0 00-5.197-5.803" />
-    },
-    {
-      title: 'Oslo ESG & Law Conference',
-      date: 'JAN 22, 2026',
-      location: 'Oslo, Norway',
-      description: 'A critical look at the evolving landscape of ESG regulations and their impact on Scandinavian businesses.',
-      icon: <Icon path="M13 10V3L4 14h7v7l9-11h-7z" />
     }
   ];
 
@@ -536,7 +538,7 @@ export default function App() {
         category: 'Corporate Law',
         title: 'Navigating Cross-Border M&A in the Nordics',
         summary: 'A deep dive into the complexities and opportunities of mergers and acquisitions across Scandinavian borders.',
-        author: 'Anja Sørensen',
+        author: 'Cristina',
         date: 'Oct 02, 2025',
         imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop',
         content: 'The Scandinavian M&A market has shown remarkable resilience and dynamism in 2025. This analysis covers the key transactions that have defined the year, highlighting the sectors driving growth, such as renewable energy and technology. We examine the strategic rationales behind these deals and the evolving legal hurdles in cross-border acquisitions.\nFurthermore, the article provides an outlook on what to expect in the final quarter and into 2026, considering macroeconomic factors and regulatory shifts that could influence deal-making across the Nordic countries. It is essential reading for corporate lawyers, investment bankers, and business leaders.'
@@ -546,7 +548,7 @@ export default function App() {
         category: 'Tech & IP',
         title: 'The Rise of AI in Legal Tech: A Scandinavian Perspective',
         summary: 'Exploring how artificial intelligence is transforming legal practices in Sweden, Denmark, and Norway.',
-        author: 'Björn Lindgren',
+        author: 'Lea',
         date: 'Sep 28, 2025',
         imageUrl: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1974&auto=format&fit=crop',
         content: "The rapid advancement of artificial intelligence presents both unprecedented opportunities and significant challenges for the legal frameworks in the Nordic region. This article delves into the proactive steps being taken by governments in Denmark, Sweden, and Norway to create a regulatory environment that fosters innovation while safeguarding fundamental rights.\nWe will analyze the current legislative proposals, compare the Nordic approach to the EU's AI Act, and discuss the ethical considerations that legal professionals must navigate when integrating AI tools into their practice. From automated contract analysis to predictive justice, the landscape is shifting, and understanding these changes is crucial for any legal expert in the region."
@@ -556,7 +558,7 @@ export default function App() {
         category: 'Sustainability',
         title: 'ESG Compliance: What Scandinavian Firms Need to Know',
         summary: 'Key considerations for Environmental, Social, and Governance compliance for businesses in the region.',
-        author: 'Ingrid Olsen',
+        author: 'Cristina',
         date: 'Sep 15, 2025',
         imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop',
         content: "While the General Data-Protection Regulation (GDPR) set a global benchmark for data privacy, several Scandinavian nations are already looking at what comes next. This piece explores the innovative data protection laws being pioneered in the region, which often go above and beyond GDPR's requirements.\nWe focus on new concepts such as data sovereignty, the rights of digital individuals, and the responsibilities of corporations in an increasingly data-driven world. For legal professionals specializing in technology and data privacy, understanding this progressive legislative direction is not just beneficial—it's a necessity."
