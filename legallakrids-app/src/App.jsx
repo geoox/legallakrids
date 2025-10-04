@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import heroVideo from './assets/videos/hero-video.mp4';
+
 
 // --- Helper Components ---
 
@@ -8,6 +10,39 @@ const Icon = ({ path, className = "w-6 h-6" }) => (
     <path strokeLinecap="round" strokeLinejoin="round" d={path} />
   </svg>
 );
+
+// A component to fade in sections as they are scrolled into view
+const FadeInSection = ({ children }) => {
+    const [isVisible, setVisible] = useState(false);
+    const domRef = useRef();
+    useEffect(() => {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setVisible(entry.isIntersecting);
+                }
+            });
+        });
+        const { current } = domRef;
+        if (current) {
+            observer.observe(current);
+        }
+        return () => {
+            if (current) {
+                observer.unobserve(current);
+            }
+        };
+    }, []);
+    return (
+        <div
+            ref={domRef}
+            className={`transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+        >
+            {children}
+        </div>
+    );
+};
+
 
 // --- Article Page Component ---
 
@@ -165,24 +200,46 @@ const Header = ({ setActiveSection, onGoHome, currentArticleId }) => {
   );
 };
 
-const backgroundImageUrl = "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop";
-const Hero = () => (
-  <section 
-    id="home" 
-    className="relative h-screen flex items-center justify-center text-center bg-cover bg-center" 
-    style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-    >
-    <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-    <div className="relative container mx-auto px-4 z-10">
-      <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
-        Legal Lakrids
-      </h1>
-      <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
-        Your premier source for legal events, news, and analysis in Scandinavia.
-      </p>
-    </div>
-  </section>
-);
+const Hero = () => {
+    const [videoError, setVideoError] = useState(false);
+
+    // This is the fallback image URL from Unsplash
+    const fallbackImageUrl = "https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?q=80&w=2070&auto=format&fit=crop";
+
+    return (
+        <section 
+            id="home" 
+            className="relative h-screen flex items-center justify-center text-center overflow-hidden bg-cover bg-center"
+            // Apply the fallback image via style if the video fails
+            style={videoError ? { backgroundImage: `url(${fallbackImageUrl})` } : {}}
+        >
+            {!videoError && (
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute z-0 w-auto min-w-full min-h-full max-w-none object-cover"
+                    // This event handler will trigger if the video fails to load
+                    onError={() => setVideoError(true)}
+                >
+                    <source src={heroVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            )}
+            <div className="absolute inset-0"></div>
+            <div className="relative container mx-auto px-4 z-10">
+                <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+                    Legal Lakrids
+                </h1>
+                <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
+                    Your premier source for legal events, news, and analysis in Scandinavia.
+                </p>
+            </div>
+        </section>
+    );
+};
+
 
 const About = () => (
   <section id="about" className="bg-gray-50 py-20 sm:py-28">
@@ -322,8 +379,11 @@ const Events = () => {
                   <p className="mt-2 text-base text-gray-600">{event.description}</p>
                 </div>
                 <div className="mt-6 md:mt-0 md:ml-6 flex-shrink-0">
-                  <button className="w-full md:w-auto inline-flex items-center justify-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900 transition-colors duration-300">
-                    Register Now
+                  <button 
+                    disabled
+                    className="w-full md:w-auto inline-flex items-center justify-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-400 cursor-not-allowed"
+                  >
+                    Coming Soon
                   </button>
                 </div>
               </div>
@@ -334,6 +394,7 @@ const Events = () => {
     </section>
   );
 };
+
 
 const Contact = () => (
     <section id="contact" className="bg-white py-20 sm:py-28">
@@ -465,7 +526,7 @@ const Footer = ({ setActiveSection }) => {
 // --- Main App Component ---
 
 export default function App() {
-  const [, setActiveSection] = useState('home');
+  const [setActiveSection] = useState('home');
   const [currentArticleId, setCurrentArticleId] = useState(null);
 
   // Consolidated and expanded article data as the single source of truth
@@ -477,7 +538,7 @@ export default function App() {
         summary: 'A deep dive into the complexities and opportunities of mergers and acquisitions across Scandinavian borders.',
         author: 'Anja Sørensen',
         date: 'Oct 02, 2025',
-        imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2232&auto=format&fit=crop',
+        imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop',
         content: 'The Scandinavian M&A market has shown remarkable resilience and dynamism in 2025. This analysis covers the key transactions that have defined the year, highlighting the sectors driving growth, such as renewable energy and technology. We examine the strategic rationales behind these deals and the evolving legal hurdles in cross-border acquisitions.\nFurthermore, the article provides an outlook on what to expect in the final quarter and into 2026, considering macroeconomic factors and regulatory shifts that could influence deal-making across the Nordic countries. It is essential reading for corporate lawyers, investment bankers, and business leaders.'
     },
     {
@@ -487,7 +548,7 @@ export default function App() {
         summary: 'Exploring how artificial intelligence is transforming legal practices in Sweden, Denmark, and Norway.',
         author: 'Björn Lindgren',
         date: 'Sep 28, 2025',
-        imageUrl: 'https://images.unsplash.com/photo-1620712943543-95fc69634367?q=80&w=2070&auto=format&fit=crop',
+        imageUrl: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1974&auto=format&fit=crop',
         content: "The rapid advancement of artificial intelligence presents both unprecedented opportunities and significant challenges for the legal frameworks in the Nordic region. This article delves into the proactive steps being taken by governments in Denmark, Sweden, and Norway to create a regulatory environment that fosters innovation while safeguarding fundamental rights.\nWe will analyze the current legislative proposals, compare the Nordic approach to the EU's AI Act, and discuss the ethical considerations that legal professionals must navigate when integrating AI tools into their practice. From automated contract analysis to predictive justice, the landscape is shifting, and understanding these changes is crucial for any legal expert in the region."
     },
     {
@@ -497,8 +558,8 @@ export default function App() {
         summary: 'Key considerations for Environmental, Social, and Governance compliance for businesses in the region.',
         author: 'Ingrid Olsen',
         date: 'Sep 15, 2025',
-        imageUrl: 'https://images.unsplash.com/photo-1594788405208-a57933b5f36e?q=80&w=2070&auto=format&fit=crop',
-        content: "While the General Data Protection Regulation (GDPR) set a global benchmark for data privacy, several Scandinavian nations are already looking at what comes next. This piece explores the innovative data protection laws being pioneered in the region, which often go above and beyond GDPR's requirements.\nWe focus on new concepts such as data sovereignty, the rights of digital individuals, and the responsibilities of corporations in an increasingly data-driven world. For legal professionals specializing in technology and data privacy, understanding this progressive legislative direction is not just beneficial—it's a necessity."
+        imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop',
+        content: "While the General Data-Protection Regulation (GDPR) set a global benchmark for data privacy, several Scandinavian nations are already looking at what comes next. This piece explores the innovative data protection laws being pioneered in the region, which often go above and beyond GDPR's requirements.\nWe focus on new concepts such as data sovereignty, the rights of digital individuals, and the responsibilities of corporations in an increasingly data-driven world. For legal professionals specializing in technology and data privacy, understanding this progressive legislative direction is not just beneficial—it's a necessity."
     }
   ];
 
@@ -525,10 +586,10 @@ export default function App() {
         ) : (
           <>
             <Hero />
-            <About />
-            <Blog articles={articles} onArticleSelect={handleArticleSelect} />
-            <Events />
-            <Contact />
+            <FadeInSection><About /></FadeInSection>
+            <FadeInSection><Blog articles={articles} onArticleSelect={handleArticleSelect} /></FadeInSection>
+            <FadeInSection><Events /></FadeInSection>
+            <FadeInSection><Contact /></FadeInSection>
           </>
         )}
       </main>
