@@ -1,5 +1,6 @@
 {
   "name": "legallakrids-app",
+  "homepage": "[https://legallakrids.com](https://legallakrids.com)",
   "private": true,
   "version": "0.0.0",
   "type": "module",
