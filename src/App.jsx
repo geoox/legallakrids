@@ -398,63 +398,80 @@ const Events = () => {
 };
 
 
-const Contact = () => (
-    <section id="contact" className="bg-white py-20 sm:py-28">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-lg mx-auto lg:max-w-none lg:grid lg:grid-cols-2 lg:gap-24">
-                <div className="text-left">
-                    <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Get in Touch</h2>
-                    <p className="mt-4 text-lg text-gray-600">
-                        We're here to help. Whether you have a question about our events, are interested in contributing an article, or have a media inquiry, please reach out.
-                    </p>
-                    <div className="mt-8 space-y-6">
-                        <div className="flex items-start">
-                            <div className="flex-shrink-0">
-                                <Icon path="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" className="h-6 w-6 text-gray-500" />
+const Contact = () => {
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const { name, email, message } = formData;
+        const subject = `Contact Form Inquiry from ${name}`;
+        const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+        const mailtoLink = `mailto:contact@legallakrids.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoLink;
+    };
+
+    return (
+        <section id="contact" className="bg-white py-20 sm:py-28">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-lg mx-auto lg:max-w-none lg:grid lg:grid-cols-2 lg:gap-24">
+                    <div className="text-left">
+                        <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Get in Touch</h2>
+                        <p className="mt-4 text-lg text-gray-600">
+                            We're here to help. Whether you have a question about our events, are interested in contributing an article, or have a media inquiry, please reach out.
+                        </p>
+                        <div className="mt-8 space-y-6">
+                            <div className="flex items-start">
+                                <div className="flex-shrink-0">
+                                    <Icon path="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" className="h-6 w-6 text-gray-500" />
+                                </div>
+                                <div className="ml-4">
+                                    <h3 className="text-lg font-medium text-gray-900">Email</h3>
+                                    <p className="mt-1 text-base text-gray-600">General Inquiries: <a href="mailto:contact@legallakrids.com" className="text-gray-800 hover:underline">contact@legallakrids.com</a></p>
+                                    <p className="mt-1 text-base text-gray-600">Media: <a href="mailto:press@legallakrids.com" className="text-gray-800 hover:underline">press@legallakrids.com</a></p>
+                                </div>
                             </div>
-                            <div className="ml-4">
-                                <h3 className="text-lg font-medium text-gray-900">Email</h3>
-                                <p className="mt-1 text-base text-gray-600">General Inquiries: <a href="mailto:contact@legallakrids.com" className="text-gray-800 hover:underline">contact@legallakrids.com</a></p>
-                                <p className="mt-1 text-base text-gray-600">Media: <a href="mailto:press@legallakrids.com" className="text-gray-800 hover:underline">press@legallakrids.com</a></p>
-                            </div>
-                        </div>
-                        <div className="flex items-start">
-                            <div className="flex-shrink-0">
-                               <Icon path="M21 10.5c0 7.142-7.5 11.25-7.5 11.25S6 17.642 6 10.5a7.5 7.5 0 1115 0z M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" className="h-6 w-6 text-gray-500" />
-                            </div>
-                            <div className="ml-4">
-                                <h3 className="text-lg font-medium text-gray-900">Office</h3>
-                                <p className="mt-1 text-base text-gray-600">Nyhavn 17, 1051</p>
-                                <p className="mt-1 text-base text-gray-600">København K, Denmark</p>
+                            <div className="flex items-start">
+                                <div className="flex-shrink-0">
+                                   <Icon path="M21 10.5c0 7.142-7.5 11.25-7.5 11.25S6 17.642 6 10.5a7.5 7.5 0 1115 0z M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" className="h-6 w-6 text-gray-500" />
+                                </div>
+                                <div className="ml-4">
+                                    <h3 className="text-lg font-medium text-gray-900">Office</h3>
+                                    <p className="mt-1 text-base text-gray-600">Nyhavn 17, 1051</p>
+                                    <p className="mt-1 text-base text-gray-600">København K, Denmark</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="mt-16 lg:mt-0">
-                    <form action="#" method="POST" className="space-y-6">
-                        <div>
-                            <label htmlFor="name" className="sr-only">Full name</label>
-                            <input type="text" name="name" id="name" autoComplete="name" className="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md" placeholder="Full name" />
-                        </div>
-                        <div>
-                            <label htmlFor="email" className="sr-only">Email</label>
-                            <input id="email" name="email" type="email" autoComplete="email" className="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md" placeholder="Email" />
-                        </div>
-                        <div>
-                            <label htmlFor="message" className="sr-only">Message</label>
-                            <textarea id="message" name="message" rows="4" className="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md" placeholder="Message"></textarea>
-                        </div>
-                        <div>
-                            <button type="submit" className="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 w-full transition-colors duration-300">
-                                Send Message
-                            </button>
-                        </div>
-                    </form>
+                    <div className="mt-16 lg:mt-0">
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div>
+                                <label htmlFor="name" className="sr-only">Full name</label>
+                                <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required autoComplete="name" className="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md" placeholder="Full name" />
+                            </div>
+                            <div>
+                                <label htmlFor="email" className="sr-only">Email</label>
+                                <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required autoComplete="email" className="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md" placeholder="Email" />
+                            </div>
+                            <div>
+                                <label htmlFor="message" className="sr-only">Message</label>
+                                <textarea id="message" name="message" rows="4" value={formData.message} onChange={handleChange} required className="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md" placeholder="Message"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" className="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 w-full transition-colors duration-300">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-);
+        </section>
+    );
+};
 
 const Footer = ({ setActiveSection }) => {
     const handleNavClick = (section) => {
@@ -475,13 +492,13 @@ const Footer = ({ setActiveSection }) => {
                             The premier source for legal news, articles, and events in Scandinavia.
                         </p>
                         <div className="flex space-x-6">
-                            <a href="#" className="text-gray-400 hover:text-white">
+                            <a href="https://www.linkedin.com/company/legal-lakrids/" className="text-gray-400 hover:text-white">
                                <span className="sr-only">LinkedIn</span>
                                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" />
                                 </svg>
                             </a>
-                            <a href="#" className="text-gray-400 hover:text-white">
+                            <a href="https://www.linkedin.com/company/legal-lakrids/" className="text-gray-400 hover:text-white">
                                 <span className="sr-only">Twitter</span>
                                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
