@@ -548,7 +548,7 @@ export default function App() {
         category: 'Tech & IP',
         title: 'The Rise of AI in Legal Tech: A Scandinavian Perspective',
         summary: 'Exploring how artificial intelligence is transforming legal practices in Sweden, Denmark, and Norway.',
-        author: 'Lea',
+        author: 'Lou',
         date: 'Sep 28, 2025',
         imageUrl: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1974&auto=format&fit=crop',
         content: "The rapid advancement of artificial intelligence presents both unprecedented opportunities and significant challenges for the legal frameworks in the Nordic region. This article delves into the proactive steps being taken by governments in Denmark, Sweden, and Norway to create a regulatory environment that fosters innovation while safeguarding fundamental rights.\nWe will analyze the current legislative proposals, compare the Nordic approach to the EU's AI Act, and discuss the ethical considerations that legal professionals must navigate when integrating AI tools into their practice. From automated contract analysis to predictive justice, the landscape is shifting, and understanding these changes is crucial for any legal expert in the region."
