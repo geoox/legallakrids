@@ -669,7 +669,7 @@ export default function App() {
           <>
             {/* SEO: Native meta tags for the homepage */}
             <title>Legal Lakrids | Scandinavian Legal Events & Insights</title>
-            <meta name="description" content="Legal Lakrids is the essential platform for legal professionals in Scandinavia, offering expert analysis, critical commentary, and exclusive events in Copenhagen and beyond." />
+            <meta name="description" content="Legal Lakrids is the essential platform for legal professionals in Scandinavia, offering expert analysis, critical commentary, and events in Copenhagen and beyond." />
             
             <Hero />
             <FadeInSection><About /></FadeInSection>
