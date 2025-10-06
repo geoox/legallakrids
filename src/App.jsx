@@ -397,7 +397,7 @@ const Events = () => {
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Upcoming Events</h2>
           <p className="mt-4 text-lg text-gray-600">
-            Connect with peers and gain valuable insights at our exclusive legal events across Scandinavia.
+            Connect with peers and gain valuable insights at legal events across Scandinavia.
           </p>
         </div>
         <div className="mt-16 max-w-lg mx-auto sm:max-w-2xl lg:max-w-4xl space-y-8">
