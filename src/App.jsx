@@ -315,19 +315,33 @@ const Founders = () => (
         <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Meet the Founders</h2>
         <div className="mt-16 flex flex-col md:flex-row justify-center items-center gap-12 md:gap-20">
           <div className="flex flex-col items-center">
-            <img
-              className="h-64 w-64 rounded-xl object-cover shadow-xl"
-              src={cristina}
-              alt="Cristina Bostean, co-founder of Legal Lakrids"
-            />
+            <a
+              href="https://www.linkedin.com/in/cristina-bostean/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group cursor-pointer"
+            >
+              <img
+                className="h-64 w-64 rounded-xl object-cover shadow-xl transition-all duration-300 ease-in-out transform group-hover:scale-105"
+                src={cristina}
+                alt="Cristina Bostean, co-founder of Legal Lakrids"
+              />
+            </a>
             <h3 className="mt-6 text-xl font-semibold text-gray-800">Cristina Bostean</h3>
           </div>
           <div className="flex flex-col items-center">
-            <img
-              className="h-64 w-64 rounded-xl object-cover shadow-xl"
-              src={lou}
-              alt="Lou Ladoire, co-founder of Legal Lakrids"
-            />
+            <a
+              href="https://www.linkedin.com/in/louladoire/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group cursor-pointer"
+            >
+              <img
+                className="h-64 w-64 rounded-xl object-cover shadow-xl transition-all duration-300 ease-in-out transform group-hover:scale-105"
+                src={lou}
+                alt="Lou Ladoire, co-founder of Legal Lakrids"
+              />
+            </a>
             <h3 className="mt-6 text-xl font-semibold text-gray-800">Lou Ladoire</h3>
           </div>
         </div>
