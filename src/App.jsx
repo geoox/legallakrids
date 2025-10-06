@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import heroVideo from './assets/videos/hero-video.mp4';
 import logo from './assets/images/logo.png';
+import lou from './assets/images/lou.jpeg';
+import cristina from './assets/images/cristina.jpeg';
 
 
 // --- Helper Components ---
@@ -282,9 +284,50 @@ const About = () => (
   </section>
 );
 
+const Founders = () => (
+  <section id="founders" className="bg-white py-20 sm:py-28">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto text-center">
+        <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Meet the Founders</h2>
+        <div className="mt-16 flex flex-col md:flex-row justify-center items-center gap-12 md:gap-20">
+          <div className="flex flex-col items-center">
+            <img
+              className="h-64 w-64 rounded-xl object-cover shadow-xl"
+              src={cristina}
+              alt="Cristina Bostean"
+            />
+            <h3 className="mt-6 text-xl font-semibold text-gray-800">Cristina Bostean</h3>
+          </div>
+          <div className="flex flex-col items-center">
+            <img
+              className="h-64 w-64 rounded-xl object-cover shadow-xl"
+              src={lou}
+              alt="Lou Ladoire"
+            />
+            <h3 className="mt-6 text-xl font-semibold text-gray-800">Lou Ladoire</h3>
+          </div>
+        </div>
+        <div className="mt-12 max-w-4xl mx-auto text-lg text-gray-600 text-justify prose prose-lg">
+          <p>
+            Cristina brings a strong M&A, corporate law and banking & finance background, shaped at PwC Romania and studies at the Sorbonne and University of Bucharest. 
+          </p>
+          <br />
+          <p>
+            Lou blends expertise in competition law, international arbitration, and cross-border regulatory work, honed at Uría Menéndez and IE Law School in Spain.
+          </p>
+          <br />
+          <p>
+            They share a strong interest in the future of law, specifically AI and tech regulation, as well as the legal challenges in highly regulated industries like logistics, energy, and pharmaceuticals.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
 const Blog = ({ articles, onArticleSelect }) => {
   return (
-    <section id="blog" className="bg-white py-20 sm:py-28">
+    <section id="blog" className="bg-gray-50 py-20 sm:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">From the Blog</h2>
@@ -333,23 +376,23 @@ const Blog = ({ articles, onArticleSelect }) => {
 const Events = () => {
   const events = [
     {
-      title: 'Nordic Legal Tech Summit 2025',
-      date: 'NOV 12, 2025',
-      location: 'Copenhagen, Denmark',
-      description: 'Join industry leaders to discuss the future of legal technology, innovation, and AI implementation in law firms.',
+      title: 'TechTorget Danmark',
+      date: 'OCT 8, 2025',
+      location: '🇩🇰 Copenhagen, Denmark',
+      description: 'Explore the transformative power of legal tech and AI in today\'s rapidly evolving global landscape.',
       icon: <Icon path="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
     },
     {
-      title: 'Scandinavian Corporate Counsel Symposium',
-      date: 'DEC 05, 2025',
-      location: 'Stockholm, Sweden',
-      description: 'An exclusive event for in-house counsel to network and explore the challenges of modern corporate governance.',
+      title: 'Google 15 Years On – Key Learnings, Antitrust Challenges, and the Road Ahead',
+      date: 'OCT 27, 2025',
+      location: '🇩🇰 Copenhagen, Denmark',
+      description: 'Reflect on the key lessons learned so far about Google, antitrust, and policing abusive actions in the tech sector.',
       icon: <Icon path="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-1a6 6 0 00-5.197-5.803" />
     }
   ];
 
   return (
-    <section id="events" className="bg-gray-50 py-20 sm:py-28">
+    <section id="events" className="bg-white py-20 sm:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Upcoming Events</h2>
@@ -411,7 +454,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="bg-white py-20 sm:py-28">
+    <section id="contact" className="bg-gray-50 py-20 sm:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-lg mx-auto lg:max-w-none lg:grid lg:grid-cols-2 lg:gap-24">
           <div className="text-left">
@@ -602,6 +645,7 @@ export default function App() {
           <>
             <Hero />
             <FadeInSection><About /></FadeInSection>
+            <FadeInSection><Founders /></FadeInSection>
             <FadeInSection><Blog articles={articles} onArticleSelect={handleArticleSelect} /></FadeInSection>
             <FadeInSection><Events /></FadeInSection>
             <FadeInSection><Contact /></FadeInSection>
@@ -612,4 +656,3 @@ export default function App() {
     </div>
   )
 }
-
