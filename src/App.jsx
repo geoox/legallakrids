@@ -54,39 +54,67 @@ const ArticlePage = ({ article, onGoHome }) => {
     window.scrollTo(0, 0);
   }, [article]);
 
+  // SEO: Structured data for the article page
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": article.title,
+    "image": article.imageUrl,
+    "author": {
+      "@type": "Person",
+      "name": article.author
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Legal Lakrids",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.legallakrids.com/logo.png" // Replace with your absolute URL
+      }
+    },
+    "datePublished": article.date,
+    "description": article.summary
+  };
+
   return (
-    <div className="pt-24 bg-white min-h-screen">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="max-w-4xl mx-auto">
-          <button
-            onClick={onGoHome}
-            className="mb-8 cursor-pointer inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors font-medium"
-          >
-            <Icon path="M10 19l-7-7m0 0l7-7m-7 7h18" className="h-5 w-5 mr-2" />
-            Back
-          </button>
-          <article>
-            <p className="text-base font-semibold text-gray-600">{article.category}</p>
-            <h1 className="mt-2 text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">{article.title}</h1>
-            <div className="text-sm text-gray-500 mb-8">
-              <span>By {article.author}</span> &middot; <span>{article.date}</span>
-            </div>
-            {/* Added the article image to the top of the page */}
-            <img
-              src={article.imageUrl}
-              alt={article.title}
-              className="w-full h-auto max-h-[500px] object-cover rounded-lg shadow-lg mb-12"
-              onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/1200x600/e2e8f0/4a5568?text=Image+Not+Found`; }}
-            />
-            <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6">
-              {article.content.split('\n').map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
-          </article>
+    <>
+      {/* SEO: Native React 19 support for meta tags and structured data */}
+      <title>{`${article.title} | Legal Lakrids`}</title>
+      <meta name="description" content={article.summary} />
+      <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
+
+      <div className="pt-24 bg-white min-h-screen">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+          <div className="max-w-4xl mx-auto">
+            <button
+              onClick={onGoHome}
+              className="mb-8 cursor-pointer inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors font-medium"
+            >
+              <Icon path="M10 19l-7-7m0 0l7-7m-7 7h18" className="h-5 w-5 mr-2" />
+              Back
+            </button>
+            <article>
+              <p className="text-base font-semibold text-gray-600">{article.category}</p>
+              <h1 className="mt-2 text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">{article.title}</h1>
+              <div className="text-sm text-gray-500 mb-8">
+                <span>By {article.author}</span> &middot; <span>{article.date}</span>
+              </div>
+              <img
+                src={article.imageUrl}
+                alt={article.title}
+                className="w-full h-auto max-h-[500px] object-cover rounded-lg shadow-lg mb-12"
+                onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/1200x600/e2e8f0/4a5568?text=Image+Not+Found`; }}
+              />
+              <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6">
+                {article.content.split('\n').map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
+            </article>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -98,7 +126,6 @@ const Header = ({ setActiveSection, onGoHome, currentArticleId }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Don't make header transparent on article pages
       if (currentArticleId) {
         setIsScrolled(true);
         return;
@@ -106,7 +133,7 @@ const Header = ({ setActiveSection, onGoHome, currentArticleId }) => {
       setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check on initial load
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, [currentArticleId]);
 
@@ -124,7 +151,6 @@ const Header = ({ setActiveSection, onGoHome, currentArticleId }) => {
 
     if (currentArticleId) {
       onGoHome();
-      // Wait for the main page to re-render before trying to scroll
       setTimeout(scrollToSection, 100);
     } else {
       scrollToSection();
@@ -151,7 +177,7 @@ const Header = ({ setActiveSection, onGoHome, currentArticleId }) => {
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
             <a href="#home" onClick={handleLogoClick} className="block bg-white">
-              <img src={logo} alt="Legal Lakrids Logo" className={`h-20 w-auto background-white`} />
+              <img src={logo} alt="Legal Lakrids Logo - Scandinavian Legal Events" className={`h-20 w-auto background-white`} />
             </a>
           </div>
           <div className="hidden md:block">
@@ -208,9 +234,8 @@ const Hero = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    // Set the playback speed once the video element is available
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.8; // Play at 75% of the original speed
+      videoRef.current.playbackRate = 0.8;
     }
   }, []);
 
@@ -238,17 +263,16 @@ const Hero = () => {
       )}
       <div className="absolute inset-0 bg-opacity-50"></div>
       <div className="relative container mx-auto px-4 z-10">
-        <div className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+        <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
           Legal Lakrids
-        </div>
+        </h1>
         <p className="text-lg md:text-2xl text-gray-200 max-w-3xl mx-auto">
-          For the acquired taste in law
+          For the acquired taste in law: Your partner in Scandinavian legal events and insights.
         </p>
       </div>
     </section>
   );
 };
-
 
 const About = () => (
   <section id="about" className="bg-gray-50 py-20 sm:py-28">
@@ -265,7 +289,7 @@ const About = () => (
             <img
               className="rounded-lg shadow-lg object-cover w-full h-full"
               src="https://images.unsplash.com/photo-1585399058947-f68f9db58e5f?q=80&w=2070&auto=format&fit=crop"
-              alt="Team collaborating in a modern office"
+              alt="Legal professionals collaborating on Scandinavian market movements"
               onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/e2e8f0/4a5568?text=Our+Team'; }}
             />
           </div>
@@ -294,7 +318,7 @@ const Founders = () => (
             <img
               className="h-64 w-64 rounded-xl object-cover shadow-xl"
               src={cristina}
-              alt="Cristina Bostean"
+              alt="Cristina Bostean, co-founder of Legal Lakrids"
             />
             <h3 className="mt-6 text-xl font-semibold text-gray-800">Cristina Bostean</h3>
           </div>
@@ -302,7 +326,7 @@ const Founders = () => (
             <img
               className="h-64 w-64 rounded-xl object-cover shadow-xl"
               src={lou}
-              alt="Lou Ladoire"
+              alt="Lou Ladoire, co-founder of Legal Lakrids"
             />
             <h3 className="mt-6 text-xl font-semibold text-gray-800">Lou Ladoire</h3>
           </div>
@@ -531,13 +555,13 @@ const Footer = ({ setActiveSection }) => {
               For the acquired taste in law
             </p>
             <div className="flex space-x-6">
-              <a href="https://www.linkedin.com/company/legal-lakrids/" className="text-gray-400 hover:text-white">
+              <a href="https://www.linkedin.com/company/legal-lakrids/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                 <span className="sr-only">LinkedIn</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" />
                 </svg>
               </a>
-              <a href="https://www.facebook.com/profile.php?id=61580814195148" className="text-gray-400 hover:text-white">
+              <a href="https://www.facebook.com/profile.php?id=61580814195148" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                 <span className="sr-only">Facebook</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
@@ -587,7 +611,6 @@ export default function App() {
   const [setActiveSection] = useState('home');
   const [currentArticleId, setCurrentArticleId] = useState(null);
 
-  // Consolidated and expanded article data as the single source of truth
   const articles = [
     {
       id: 1,
@@ -595,7 +618,7 @@ export default function App() {
       title: 'Navigating Cross-Border M&A in the Nordics',
       summary: 'A deep dive into the complexities and opportunities of mergers and acquisitions across Scandinavian borders.',
       author: 'Cristina',
-      date: 'Oct 02, 2025',
+      date: '2025-10-02',
       imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop',
       content: 'The Scandinavian M&A market has shown remarkable resilience and dynamism in 2025. This analysis covers the key transactions that have defined the year, highlighting the sectors driving growth, such as renewable energy and technology. We examine the strategic rationales behind these deals and the evolving legal hurdles in cross-border acquisitions.\nFurthermore, the article provides an outlook on what to expect in the final quarter and into 2026, considering macroeconomic factors and regulatory shifts that could influence deal-making across the Nordic countries. It is essential reading for corporate lawyers, investment bankers, and business leaders.'
     },
@@ -605,7 +628,7 @@ export default function App() {
       title: 'The Rise of AI in Legal Tech: A Scandinavian Perspective',
       summary: 'Exploring how artificial intelligence is transforming legal practices in Sweden, Denmark, and Norway.',
       author: 'Lou',
-      date: 'Sep 28, 2025',
+      date: '2025-09-28',
       imageUrl: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1974&auto=format&fit=crop',
       content: "The rapid advancement of artificial intelligence presents both unprecedented opportunities and significant challenges for the legal frameworks in the Nordic region. This article delves into the proactive steps being taken by governments in Denmark, Sweden, and Norway to create a regulatory environment that fosters innovation while safeguarding fundamental rights.\nWe will analyze the current legislative proposals, compare the Nordic approach to the EU's AI Act, and discuss the ethical considerations that legal professionals must navigate when integrating AI tools into their practice. From automated contract analysis to predictive justice, the landscape is shifting, and understanding these changes is crucial for any legal expert in the region."
     },
@@ -615,7 +638,7 @@ export default function App() {
       title: 'ESG Compliance: What Scandinavian Firms Need to Know',
       summary: 'Key considerations for Environmental, Social, and Governance compliance for businesses in the region.',
       author: 'Cristina',
-      date: 'Sep 15, 2025',
+      date: '2025-09-15',
       imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop',
       content: "While the General Data-Protection Regulation (GDPR) set a global benchmark for data privacy, several Scandinavian nations are already looking at what comes next. This piece explores the innovative data protection laws being pioneered in the region, which often go above and beyond GDPR's requirements.\nWe focus on new concepts such as data sovereignty, the rights of digital individuals, and the responsibilities of corporations in an increasingly data-driven world. For legal professionals specializing in technology and data privacy, understanding this progressive legislative direction is not just beneficial—it's a necessity."
     }
@@ -632,6 +655,7 @@ export default function App() {
   const selectedArticle = currentArticleId ? articles.find(a => a.id === currentArticleId) : null;
 
   return (
+    // The HelmetProvider wrapper is now removed.
     <div className="bg-white">
       <Header
         setActiveSection={setActiveSection}
@@ -643,6 +667,10 @@ export default function App() {
           <ArticlePage article={selectedArticle} onGoHome={handleGoHome} />
         ) : (
           <>
+            {/* SEO: Native meta tags for the homepage */}
+            <title>Legal Lakrids | Scandinavian Legal Events & Insights</title>
+            <meta name="description" content="Legal Lakrids is the essential platform for legal professionals in Scandinavia, offering expert analysis, critical commentary, and exclusive events in Copenhagen and beyond." />
+            
             <Hero />
             <FadeInSection><About /></FadeInSection>
             <FadeInSection><Founders /></FadeInSection>
