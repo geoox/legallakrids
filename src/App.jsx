@@ -626,15 +626,15 @@ const Footer = ({ setActiveSection }) => {
               <div>
                 <h3 className="text-sm font-semibold text-gray-200 tracking-wider uppercase">Navigation</h3>
                 <ul className="mt-4 space-y-4">
-                  <li><a onClick={() => handleNavClick('about')} className="text-base text-gray-300 hover:text-white cursor-pointer">About</a></li>
-                  <li><a onClick={() => handleNavClick('blog')} className="text-base text-gray-300 hover:text-white cursor-pointer">Blog</a></li>
+                  <li><a href="#about" onClick={(e) => { e.preventDefault(); handleNavClick('about'); }} className="text-base text-gray-300 hover:text-white cursor-pointer">About</a></li>
+                  <li><a href="#blog" onClick={(e) => { e.preventDefault(); handleNavClick('blog'); }} className="text-base text-gray-300 hover:text-white cursor-pointer">Blog</a></li>
                 </ul>
               </div>
               <div className="mt-12 md:mt-0">
                 <h3 className="text-sm font-semibold text-gray-200 tracking-wider uppercase">&nbsp;</h3>
                 <ul className="mt-4 space-y-4">
-                  <li><a onClick={() => handleNavClick('events')} className="text-base text-gray-300 hover:text-white cursor-pointer">Events</a></li>
-                  <li><a onClick={() => handleNavClick('contact')} className="text-base text-gray-300 hover:text-white cursor-pointer">Contact</a></li>
+                  <li><a href="#events" onClick={(e) => { e.preventDefault(); handleNavClick('events'); }} className="text-base text-gray-300 hover:text-white cursor-pointer">Events</a></li>
+                  <li><a href="#contact" onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }} className="text-base text-gray-300 hover:text-white cursor-pointer">Contact</a></li>
                 </ul>
               </div>
             </div>
@@ -660,7 +660,8 @@ const Footer = ({ setActiveSection }) => {
 // --- Main App Component ---
 
 export default function App() {
-  const [setActiveSection] = useState('home');
+  // eslint-disable-next-line no-unused-vars
+  const [activeSection, setActiveSection] = useState('home');
   const [currentArticleId, setCurrentArticleId] = useState(null);
 
   // Memoize articles to prevent unnecessary re-renders
