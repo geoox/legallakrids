@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import heroVideo from './assets/videos/hero-video.mp4';
 import logo from './assets/images/logo.png';
 import lou from './assets/images/lou.jpeg';
@@ -433,7 +433,7 @@ const Events = () => {
     <section id="events" className="bg-white py-20 sm:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Upcoming Events</h2>
+          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Events</h2>
           <p className="mt-4 text-lg text-gray-600">
             Connect with peers and gain valuable insights at legal events across Scandinavia.
           </p>
@@ -625,7 +625,8 @@ export default function App() {
   const [setActiveSection] = useState('home');
   const [currentArticleId, setCurrentArticleId] = useState(null);
 
-  const articles = [
+  // Memoize articles to prevent unnecessary re-renders
+  const articles = useMemo(() => [
     {
       id: 1,
       category: 'Corporate Law',
@@ -656,14 +657,42 @@ export default function App() {
       imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop',
       content: "While the General Data-Protection Regulation (GDPR) set a global benchmark for data privacy, several Scandinavian nations are already looking at what comes next. This piece explores the innovative data protection laws being pioneered in the region, which often go above and beyond GDPR's requirements.\nWe focus on new concepts such as data sovereignty, the rights of digital individuals, and the responsibilities of corporations in an increasingly data-driven world. For legal professionals specializing in technology and data privacy, understanding this progressive legislative direction is not just beneficial—it's a necessity."
     }
-  ];
+  ], []); // Empty dependency array since articles are static
+
+  // Handle deep linking on page load and URL changes
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#article/')) {
+        const articleId = parseInt(hash.replace('#article/', ''), 10);
+        if (!isNaN(articleId) && articles.some(article => article.id === articleId)) {
+          setCurrentArticleId(articleId);
+        } else {
+          // Invalid article ID, redirect to home
+          window.history.replaceState(null, '', window.location.pathname);
+          setCurrentArticleId(null);
+        }
+      } else {
+        setCurrentArticleId(null);
+      }
+    };
+
+    // Handle initial load
+    handleLocationChange();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => window.removeEventListener('hashchange', handleLocationChange);
+  }, [articles]); // Add articles as dependency since we use it in the effect
 
   const handleArticleSelect = (id) => {
     setCurrentArticleId(id);
+    window.history.pushState(null, '', `#article/${id}`);
   };
 
   const handleGoHome = () => {
     setCurrentArticleId(null);
+    window.history.pushState(null, '', window.location.pathname);
   };
 
   const selectedArticle = currentArticleId ? articles.find(a => a.id === currentArticleId) : null;
@@ -687,9 +716,9 @@ export default function App() {
             
             <Hero />
             <FadeInSection><About /></FadeInSection>
+            <FadeInSection><Events /></FadeInSection>
             <FadeInSection><Founders /></FadeInSection>
             <FadeInSection><Blog articles={articles} onArticleSelect={handleArticleSelect} /></FadeInSection>
-            <FadeInSection><Events /></FadeInSection>
             <FadeInSection><Contact /></FadeInSection>
           </>
         )}
