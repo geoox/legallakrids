@@ -105,7 +105,7 @@ const ArticlePage = ({ article, onGoHome }) => {
                 className="w-full h-auto max-h-[500px] object-cover rounded-lg shadow-lg mb-12"
                 onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/1200x600/e2e8f0/4a5568?text=Image+Not+Found`; }}
               />
-              <div 
+              <div
                 className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6"
                 dangerouslySetInnerHTML={{
                   __html: '<p>' + article.content
@@ -356,7 +356,7 @@ const Founders = () => (
         </div>
         <div className="mt-12 max-w-4xl mx-auto text-lg text-gray-600 text-justify prose prose-lg">
           <p>
-            Cristina brings a strong M&A, corporate law and banking & finance background, shaped at PwC Romania and studies at the Sorbonne and University of Bucharest. 
+            Cristina brings a strong M&A, corporate law and banking & finance background, shaped at PwC Romania and studies at the Sorbonne and University of Bucharest.
           </p>
           <br />
           <p>
@@ -427,6 +427,7 @@ const Events = () => {
       date: 'OCT 8, 2025',
       location: '🇩🇰 Copenhagen, Denmark',
       description: 'Explore the transformative power of legal tech and AI in today\'s rapidly evolving global landscape.',
+      isPast: true,
       icon: <Icon path="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
     },
     {
@@ -435,7 +436,35 @@ const Events = () => {
       location: '🇩🇰 Copenhagen, Denmark',
       description: 'Reflect on the key lessons learned so far about Google, antitrust, and policing abusive actions in the tech sector.',
       icon: <Icon path="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-1a6 6 0 00-5.197-5.803" />
-    }
+    },
+    {
+      title: 'Accura Open House',
+      date: 'NOV 6, 2025',
+      location: '🇩🇰 Alexandriagade 8, 2150, Nordhavn',
+      description: 'Experience Accura’s innovative approach to legal services and network with industry professionals.',
+      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />
+    },
+    {
+      title: 'Breakfast Briefing with Martin Scheinin',
+      date: 'NOV 6, 2025',
+      location: '🇩🇰 Njalsgade 76, 2300 Copenhagen S',
+      description: 'Norms, Sources and Facts in International Law: Some Reflections on Theory, Methodology and Practice',
+      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />
+    },
+    {
+      title: 'Course on Green Hydrogen Regulation',
+      date: 'NOV 11, 2025',
+      location: '🇩🇰 Room 8A.0.57 – Faculty of Law, University of Copenhagen',
+      description: 'This hybrid course offers deep insights into the EU and Denmark’s Hydrogen laws and policies.',
+      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />
+    },
+    {
+      title: 'Nordic Ethics and Compliance Survey Launch',
+      date: 'NOV 25, 2025',
+      location: '🇩🇰 Axel Towers, Axel Torv 2, 1609 Copenhagen',
+      description: 'Inspiration, new insights and great networking with peers in the ethics and compliance field.',
+      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />
+    },
   ];
 
   return (
@@ -471,7 +500,7 @@ const Events = () => {
                     disabled
                     className="w-full md:w-auto inline-flex items-center justify-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-400 cursor-not-allowed"
                   >
-                    Coming Soon
+                    Sign up
                   </button>
                 </div>
               </div>
@@ -722,7 +751,7 @@ For companies active in Denmark (or across the European Union) merger checklists
             {/* SEO: Native meta tags for the homepage */}
             <title>Legal Lakrids | Scandinavian Legal Events & Insights</title>
             <meta name="description" content="Legal Lakrids is the essential platform for legal professionals in Scandinavia, offering expert analysis, critical commentary, and events in Copenhagen and beyond." />
-            
+
             <Hero />
             <FadeInSection><About /></FadeInSection>
             <FadeInSection><Events /></FadeInSection>
