@@ -105,11 +105,20 @@ const ArticlePage = ({ article, onGoHome }) => {
                 className="w-full h-auto max-h-[500px] object-cover rounded-lg shadow-lg mb-12"
                 onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/1200x600/e2e8f0/4a5568?text=Image+Not+Found`; }}
               />
-              <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6">
-                {article.content.split('\n').map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-              </div>
+              <div 
+                className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6"
+                dangerouslySetInnerHTML={{
+                  __html: '<p>' + article.content
+                    .replace(/"([^"]+)"/g, '<span class="italic">$1</span>') // 1. Italicize quotes (MUST run before links)
+                    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>') // 2. Bold text
+                    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-gray-900 hover:text-gray-600 underline transition duration-150 ease-in-out">$1</a>') // 3. Links
+                    .replace(/^-\s(.+)$/gm, '</p><ul class="list-disc pl-6"><li>$1</li></ul><p>') // 4. Unordered lists
+                    .replace(/<\/ul><p><ul class="list-disc pl-6">/g, '') // 5. Fix adjacent list items
+                    .replace(/\n\n/g, '</p><p>') // 6. Paragraphs
+                    .replace(/\n/g, '<br />') // 7. Line breaks
+                    + '</p>'
+                }}
+              />
             </article>
           </div>
         </div>
@@ -628,35 +637,35 @@ export default function App() {
   // Memoize articles to prevent unnecessary re-renders
   const articles = useMemo(() => [
     {
-      id: 1,
-      category: 'Corporate Law',
-      title: 'Navigating Cross-Border M&A in the Nordics',
-      summary: 'A deep dive into the complexities and opportunities of mergers and acquisitions across Scandinavian borders.',
-      author: 'Cristina',
-      date: '2025-10-02',
-      imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop',
-      content: 'The Scandinavian M&A market has shown remarkable resilience and dynamism in 2025. This analysis covers the key transactions that have defined the year, highlighting the sectors driving growth, such as renewable energy and technology. We examine the strategic rationales behind these deals and the evolving legal hurdles in cross-border acquisitions.\nFurthermore, the article provides an outlook on what to expect in the final quarter and into 2026, considering macroeconomic factors and regulatory shifts that could influence deal-making across the Nordic countries. It is essential reading for corporate lawyers, investment bankers, and business leaders.'
-    },
-    {
-      id: 2,
-      category: 'Tech & IP',
-      title: 'The Rise of AI in Legal Tech: A Scandinavian Perspective',
-      summary: 'Exploring how artificial intelligence is transforming legal practices in Sweden, Denmark, and Norway.',
+      id: 'quick-must-knows-on-the-danish-and-eu-stricter-merger-control',
+      category: 'Competition Law',
+      title: 'Quick must-knows on the Danish (and EU) stricter merger control',
+      summary: 'The Danish Competition and Consumer Authority (DCCA) has recently begun using its new "call-in" power to require notification for mergers that fall below regular financial thresholds.',
       author: 'Lou',
-      date: '2025-09-28',
-      imageUrl: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1974&auto=format&fit=crop',
-      content: "The rapid advancement of artificial intelligence presents both unprecedented opportunities and significant challenges for the legal frameworks in the Nordic region. This article delves into the proactive steps being taken by governments in Denmark, Sweden, and Norway to create a regulatory environment that fosters innovation while safeguarding fundamental rights.\nWe will analyze the current legislative proposals, compare the Nordic approach to the EU's AI Act, and discuss the ethical considerations that legal professionals must navigate when integrating AI tools into their practice. From automated contract analysis to predictive justice, the landscape is shifting, and understanding these changes is crucial for any legal expert in the region."
+      date: '2025-10-24',
+      imageUrl: 'https://lh3.googleusercontent.com/drive-storage/AJQWtBPuTy54rxWVIyOAwcx3K5nDh2ywEnsdmfF59th3PHH8Fh3kae0T_P8SL1DLccx4elbMyjyt6J-Jz-ZGiE0wKU9amlkt5eATYWimCqJPj-ZKwDg=w3008-h1660',
+      content: `On August 26th and 27th, the **Danish Competition and Consumer Authority (DCCA)** issued its first two decisions exercising their "call-in" power for mergers that fall below the thresholds of Article 12(1) of the Danish Competition Act (DCA).
+
+The recently amended [Article 12 DCA (paragraph 6)](https://en.kfst.dk/media/s4ybfdap/the-danish-competition-act-1150-af-03112024.pdf) grants the DCCA power to require notification of mergers that fall below the "regular" thresholds established in its first paragraph, when: (i) the parties' combined Danish turnover exceeds DKK 50 million (≈ €6.5 m), and (ii) the deal risks significantly impeding effective competition.
+
+Once the DCCA becomes “aware” of a merger, they have 15 working days to decide whether to call it in, and no later than three months after signing (extendable to six after closing in exceptional cases). In the Uber/Dantaxi case, although the merger had been closed since May, the DCCA decided that it raised enough competition concerns in the taxi dispatch and transport markets to require notification three months later. Ann Sofie Vrang, Head of Division at the DCCA, shared with us that the Danish authority considers to be aware of a merger once they have received sufficient information to decide on whether to call-in or not. In Uber/Dantaxi, the merger was closed shortly after signature, and the DCCA didn’t have the necessary information until August to call them in. 
+
+This follows a broader trend across national authorities in the EU toward increased scrutiny of below-threshold mergers, and is likely due to both a gap left by the [CJEU Illuma/Grail](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:62022CJ0611) judgement (on the application of Article 22 EUMR), and a growing awareness that, under regular thresholds, innovation-driven deals could escape review despite harming competition. Nevertheless, in their most recent call-in decision (OneMed/Kirstine Hardam), the DCCA targeted the medical supplies/ostomy‐care products market, indicating that call-in powers will not be confined to digital or high-tech sectors.
+
+**Key takeaways:**
+
+The Danish decisions of 26/27 August signal that below‑threshold merger control is no longer theoretical in Denmark, it’s operational. Combined with evolving EU restrictions, the message to M&A practitioners is clear: even if the regular quantitative thresholds are not met, there is a non‑negligible risk of regulatory intervention. 
+
+For companies active in Denmark (or across the European Union) merger checklists should therefore include:
+
+- Always conduct a **competition risk assessment** regardless of thresholds, try to ask: “Could this merger significantly impede effective competition?”. Especially in cross-border deals, monitor national rules in each jurisdiction for call‑in powers or similar below‑threshold mechanisms.
+
+- **Consider early dialogue with competition authorities** and ensure documentation of reasoning in case intervention arises. In the case of the DCCA, they have been receiving several inquiries since the application of this new rule.  
+
+- **For deals already closed** (like the Uber case), calling‑in may lead to stand‑still obligations (or even unwinding risks),  reinforcing that deal clearance processes must factor in below‑threshold risk.
+
+**Particularly relevant for SPA / transaction timeline planning**: (i) possible notification requirement, (ii) standstill implications, (iii) timeline delays.`
     },
-    {
-      id: 3,
-      category: 'Sustainability',
-      title: 'ESG Compliance: What Scandinavian Firms Need to Know',
-      summary: 'Key considerations for Environmental, Social, and Governance compliance for businesses in the region.',
-      author: 'Cristina',
-      date: '2025-09-15',
-      imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop',
-      content: "While the General Data-Protection Regulation (GDPR) set a global benchmark for data privacy, several Scandinavian nations are already looking at what comes next. This piece explores the innovative data protection laws being pioneered in the region, which often go above and beyond GDPR's requirements.\nWe focus on new concepts such as data sovereignty, the rights of digital individuals, and the responsibilities of corporations in an increasingly data-driven world. For legal professionals specializing in technology and data privacy, understanding this progressive legislative direction is not just beneficial—it's a necessity."
-    }
   ], []); // Empty dependency array since articles are static
 
   // Handle deep linking on page load and URL changes
@@ -717,8 +726,8 @@ export default function App() {
             <Hero />
             <FadeInSection><About /></FadeInSection>
             <FadeInSection><Events /></FadeInSection>
-            <FadeInSection><Founders /></FadeInSection>
             <FadeInSection><Blog articles={articles} onArticleSelect={handleArticleSelect} /></FadeInSection>
+            <FadeInSection><Founders /></FadeInSection>
             <FadeInSection><Contact /></FadeInSection>
           </>
         )}
