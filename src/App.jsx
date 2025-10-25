@@ -428,42 +428,48 @@ const Events = () => {
       location: '🇩🇰 Copenhagen, Denmark',
       description: 'Explore the transformative power of legal tech and AI in today\'s rapidly evolving global landscape.',
       isPast: true,
-      icon: <Icon path="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+      icon: <Icon path="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />,
+      hrefLink: 'https://event.techtorget.com/techtorget-copenhagen-2025/'
     },
     {
       title: 'Google 15 Years On – Key Learnings, Antitrust Challenges, and the Road Ahead',
       date: 'OCT 27, 2025',
       location: '🇩🇰 Copenhagen, Denmark',
       description: 'Reflect on the key lessons learned so far about Google, antitrust, and policing abusive actions in the tech sector.',
-      icon: <Icon path="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-1a6 6 0 00-5.197-5.803" />
+      icon: <Icon path="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-1a6 6 0 00-5.197-5.803" />,
+      hrefLink: 'https://www.cbs.dk/en/research/departments-and-centres/department-of-business-humanities-and-law/cbs-law/events/google-15-years-on-key-learnings-antitrust-challenges-and-the-road-ahead'
     },
     {
       title: 'Accura Open House',
       date: 'NOV 6, 2025',
       location: '🇩🇰 Alexandriagade 8, 2150, Nordhavn',
       description: 'Experience Accura’s innovative approach to legal services and network with industry professionals.',
-      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />
+      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />,
+      hrefLink: 'https://app.happenings.dk/buy/449921a2-8b55-4c1a-81a3-23d8806df5d2'
     },
     {
       title: 'Breakfast Briefing with Martin Scheinin',
       date: 'NOV 6, 2025',
       location: '🇩🇰 Njalsgade 76, 2300 Copenhagen S',
       description: 'Norms, Sources and Facts in International Law: Some Reflections on Theory, Methodology and Practice',
-      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />
+      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />,
+      hrefLink: 'https://jura.ku.dk/icourts/calendar/2025/breakfast-briefing-with-martin-scheinin/'
     },
     {
       title: 'Course on Green Hydrogen Regulation',
       date: 'NOV 11, 2025',
       location: '🇩🇰 Room 8A.0.57 – Faculty of Law, University of Copenhagen',
       description: 'This hybrid course offers deep insights into the EU and Denmark’s Hydrogen laws and policies.',
-      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />
+      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />,
+      hrefLink: 'https://jura.ku.dk/clima/calendar/2025/course-on-green-hydrogen/'
     },
     {
       title: 'Nordic Ethics and Compliance Survey Launch',
       date: 'NOV 25, 2025',
       location: '🇩🇰 Axel Towers, Axel Torv 2, 1609 Copenhagen',
       description: 'Inspiration, new insights and great networking with peers in the ethics and compliance field.',
-      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />
+      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />,
+      hrefLink: 'https://gorrissenfederspiel.com/en/events/nordic-ethics-compliance-survey-launch-in-copenhagen/'
     },
   ];
 
@@ -496,12 +502,14 @@ const Events = () => {
                   <p className="mt-2 text-base text-gray-600">{event.description}</p>
                 </div>
                 <div className="mt-6 md:mt-0 md:ml-6 flex-shrink-0">
-                  <button
-                    disabled
-                    className="w-full md:w-auto inline-flex items-center justify-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-400 cursor-not-allowed"
+                  <a
+                    href={event.hrefLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full md:w-auto inline-flex items-center justify-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900 transition-colors duration-300"
                   >
-                    Sign up
-                  </button>
+                    Read more
+                  </a>
                 </div>
               </div>
             </div>
@@ -774,7 +782,7 @@ export default function App() {
       summary: 'The Danish Competition and Consumer Authority (DCCA) has recently begun using its new "call-in" power to require notification for mergers that fall below regular financial thresholds.',
       author: 'Lou',
       date: '2025-10-24',
-      imageUrl: 'https://lh3.googleusercontent.com/drive-storage/AJQWtBPuTy54rxWVIyOAwcx3K5nDh2ywEnsdmfF59th3PHH8Fh3kae0T_P8SL1DLccx4elbMyjyt6J-Jz-ZGiE0wKU9amlkt5eATYWimCqJPj-ZKwDg=w3008-h1660',
+      imageUrl: 'https://freerangestock.com/sample/169061/close-up-of-yellow-and-black-road-markings.jpg',
       content: `On August 26th and 27th, the **Danish Competition and Consumer Authority (DCCA)** issued its first two decisions exercising their "call-in" power for mergers that fall below the thresholds of Article 12(1) of the Danish Competition Act (DCA).
 
 The recently amended [Article 12 DCA (paragraph 6)](https://en.kfst.dk/media/s4ybfdap/the-danish-competition-act-1150-af-03112024.pdf) grants the DCCA power to require notification of mergers that fall below the "regular" thresholds established in its first paragraph, when: (i) the parties' combined Danish turnover exceeds DKK 50 million (≈ €6.5 m), and (ii) the deal risks significantly impeding effective competition.
