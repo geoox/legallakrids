@@ -856,16 +856,20 @@ The panelists included:
     const handleLocationChange = () => {
       const hash = window.location.hash;
       if (hash.startsWith('#article/')) {
-        const articleId = parseInt(hash.replace('#article/', ''), 10);
-        if (!isNaN(articleId) && articles.some(article => article.id === articleId)) {
-          setCurrentArticleId(articleId);
+        const articlePath = hash.replace('#article/', '');
+        const matchingArticle = articles.find(article => article.id === articlePath);
+        if (matchingArticle) {
+          setCurrentArticleId(articlePath);
         } else {
-          // Invalid article ID, redirect to home
+          // Only redirect to home if no matching article is found
           window.history.replaceState(null, '', window.location.pathname);
           setCurrentArticleId(null);
         }
+      } else if (hash === '#privacy-policy') {
+        setShowPrivacyPolicy(true);
       } else {
         setCurrentArticleId(null);
+        setShowPrivacyPolicy(false);
       }
     };
 
@@ -879,7 +883,8 @@ The panelists included:
 
   const handleArticleSelect = (id) => {
     setCurrentArticleId(id);
-    window.history.pushState(null, '', `#article/${id}`);
+    // Use replaceState instead of pushState to ensure consistent behavior
+    window.history.replaceState(null, '', `#article/${id}`);
   };
 
   const handleGoHome = () => {
