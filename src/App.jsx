@@ -805,6 +805,50 @@ For companies active in Denmark (or across the European Union) merger checklists
 
 **Particularly relevant for SPA / transaction timeline planning**: (i) possible notification requirement, (ii) standstill implications, (iii) timeline delays.`
     },
+    {
+      id: 'legal-lakrids-highlights-at-techtorget-2025-the-inevitable-integration-of-ai',
+      category: 'Competition Law',
+      title: 'Legal Lakrids Highlights at TechTorget 2025: The Inevitable Integration of AI',
+      summary: 'At TechTorget 2025, Legal Lakrids explored the transformative impact of AI on the legal landscape, emphasizing the need for adaptation and ethical considerations in this rapidly evolving field.',
+      author: 'Lou',
+      date: '2025-10-30',
+      imageUrl: 'https://images.unsplash.com/photo-1560439514-4e9645039924?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2070',
+      content: `
+      Hosted at Dansk Industri in Copenhagen, the 2025 TechTorget event successfully brought together the legal community to address critical advancements in legal technology and AI.
+      
+Legal Lakrids was front and center at this event, which focused on technology's dynamic intersection with law and business. The gathering highlighted how innovative IT solutions offer a direct pathway to significantly enhance the quality, efficiency, and profitability of legal services throughout the Nordic region and globally.
+
+The main stage featured a balanced and representative panel, bringing together diverse perspectives from law firms, such as **DLA Piper Denmark, Gorrissen Federspiel, Kromann Reumert, and Poul Schmith Kammeradvokaten**; companies, such as **PwC Danmark and Wordsmith AI Academy; the Danish Bar and Law Society; Djøf Advokat**; and non-profit organizations, like **Copenhagen Legal Tech**. 
+
+The session involved asking each panelist about their current attitude towards AI and its practical applications. Christina Bruun Geertsen from **Kromann Reumert** noted a significant attitude change in the last 12 months, attributing the shift primarily to AI’s growing importance to clients, making adoption a business imperative rather than a theoretical luxury.
+
+Andrew Hjuler Crichton from **Advokatsamfundet** stressed the importance of maintaining professional ethics and client confidentiality as AI tools become ubiquitous. He emphasized that AI should be viewed as an assistant that augments, but never replaces, the core judgment and responsibility of the lawyer.
+
+Beyond the main stage, the conference hall was buzzing with activity, featuring numerous stands showcasing the latest tools and innovations in legal technology, such as Legora (AI contract review), **Juristic Jurimesh** (eDiscovery solutions), **Single Draft** (document automation), and **Thomson Reuters** (legal research and software).
+
+The clear message from TechTorget 2025 is that the question is no longer whether AI will change legal practice, but how fast and how comprehensively. Legal professionals are actively moving past initial hesitation and embracing the digital tools necessary to secure their competitive edge in a global market defined by efficiency.
+
+The panelists included:
+- Andrew Hjuler Crichton, Generalsekretær, Advokatsamfundet
+
+- Laura Jeffords Greenberg, Head of Wordsmith AI Academy
+
+- Marlene Winther Plas, Partner, Head of IPT, DLA Piper Denmark
+
+- Benedikte Bolvig Lund, Vice Chairman, Djøf Advokat
+
+- Lena Ernlund Malmberg, Partner - Head of NewLaw | PwC Legal Business Solutions | PwC Denmark
+
+- Martin André Dittmer, Managing Partner, Gorrissen Federspiel
+
+- Christina Bruun Geertsen, Managing Partner, Kromann Reumert
+
+- Stine Mangor Tornmark, Co-founder and CEO, legaltech-startup Openli
+
+- Cathrine Wollenberg Zittan, Partner/lawyer, Poul Schmith Kammeradvokaten
+
+      `,
+    },
   ], []); // Empty dependency array since articles are static
 
   // Handle deep linking on page load and URL changes
