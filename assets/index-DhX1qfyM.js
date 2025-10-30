@@ -26,4 +26,38 @@ For companies active in Denmark (or across the European Union) merger checklists
 
 - **For deals already closed** (like the Uber case), calling‑in may lead to stand‑still obligations (or even unwinding risks),  reinforcing that deal clearance processes must factor in below‑threshold risk.
 
-**Particularly relevant for SPA / transaction timeline planning**: (i) possible notification requirement, (ii) standstill implications, (iii) timeline delays.`}],[]);(0,_.useEffect)(()=>{let e=()=>{let e=window.location.hash;if(e.startsWith(`#article/`)){let t=parseInt(e.replace(`#article/`,``),10);!isNaN(t)&&i.some(e=>e.id===t)?r(t):(window.history.replaceState(null,``,window.location.pathname),r(null))}else r(null)};return e(),window.addEventListener(`hashchange`,e),()=>window.removeEventListener(`hashchange`,e)},[i]);let a=e=>{r(e),window.history.pushState(null,``,`#article/${e}`)},o=()=>{r(null),window.history.pushState(null,``,window.location.pathname)},s=n?i.find(e=>e.id===n):null,[c,l]=(0,_.useState)(!1);return(0,S.jsxs)(`div`,{className:`bg-white`,children:[(0,S.jsx)(te,{setActiveSection:t,onGoHome:o,currentArticleId:n}),(0,S.jsx)(`main`,{children:c?(0,S.jsx)(se,{onGoHome:()=>{l(!1),window.history.pushState(null,``,window.location.pathname)}}):s?(0,S.jsx)(ee,{article:s,onGoHome:o}):(0,S.jsxs)(S.Fragment,{children:[(0,S.jsx)(`title`,{children:`Legal Lakrids | Scandinavian Legal Events & Insights`}),(0,S.jsx)(`meta`,{name:`description`,content:`Legal Lakrids is the essential platform for legal professionals in Scandinavia, offering expert analysis, critical commentary, and events in Copenhagen and beyond.`}),(0,S.jsx)(ne,{}),(0,S.jsx)(w,{children:(0,S.jsx)(T,{})}),(0,S.jsx)(w,{children:(0,S.jsx)(ae,{})}),(0,S.jsx)(w,{children:(0,S.jsx)(ie,{articles:i,onArticleSelect:a})}),(0,S.jsx)(w,{children:(0,S.jsx)(re,{})}),(0,S.jsx)(w,{children:(0,S.jsx)(oe,{})})]})}),(0,S.jsx)(ce,{setActiveSection:t,onPrivacyPolicyClick:()=>{l(!0),window.history.pushState(null,``,`#privacy-policy`)}})]})}(0,g.createRoot)(document.getElementById(`root`)).render((0,S.jsx)(_.StrictMode,{children:(0,S.jsx)(le,{})}));
+**Particularly relevant for SPA / transaction timeline planning**: (i) possible notification requirement, (ii) standstill implications, (iii) timeline delays.`},{id:`legal-lakrids-highlights-at-techtorget-2025-the-inevitable-integration-of-ai`,category:`Legal Events`,title:`Legal Lakrids Highlights at TechTorget 2025: The Inevitable Integration of AI`,summary:`At TechTorget 2025, Legal Lakrids explored the transformative impact of AI on the legal landscape, emphasizing the need for adaptation and ethical considerations in this rapidly evolving field.`,author:`Lou`,date:`2025-10-30`,imageUrl:`https://images.unsplash.com/photo-1560439514-4e9645039924?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2070`,content:`
+      Hosted at Dansk Industri in Copenhagen, the 2025 TechTorget event successfully brought together the legal community to address critical advancements in legal technology and AI.
+      
+Legal Lakrids was front and center at this event, which focused on technology's dynamic intersection with law and business. The gathering highlighted how innovative IT solutions offer a direct pathway to significantly enhance the quality, efficiency, and profitability of legal services throughout the Nordic region and globally.
+
+The main stage featured a balanced and representative panel, bringing together diverse perspectives from law firms, such as **DLA Piper Denmark, Gorrissen Federspiel, Kromann Reumert, and Poul Schmith Kammeradvokaten**; companies, such as **PwC Danmark and Wordsmith AI Academy; the Danish Bar and Law Society; Djøf Advokat**; and non-profit organizations, like **Copenhagen Legal Tech**. 
+
+The session involved asking each panelist about their current attitude towards AI and its practical applications. Christina Bruun Geertsen from **Kromann Reumert** noted a significant attitude change in the last 12 months, attributing the shift primarily to AI’s growing importance to clients, making adoption a business imperative rather than a theoretical luxury.
+
+Andrew Hjuler Crichton from **Advokatsamfundet** stressed the importance of maintaining professional ethics and client confidentiality as AI tools become ubiquitous. He emphasized that AI should be viewed as an assistant that augments, but never replaces, the core judgment and responsibility of the lawyer.
+
+Beyond the main stage, the conference hall was buzzing with activity, featuring numerous stands showcasing the latest tools and innovations in legal technology, such as Legora (AI contract review), **Juristic Jurimesh** (eDiscovery solutions), **Single Draft** (document automation), and **Thomson Reuters** (legal research and software).
+
+The clear message from TechTorget 2025 is that the question is no longer whether AI will change legal practice, but how fast and how comprehensively. Legal professionals are actively moving past initial hesitation and embracing the digital tools necessary to secure their competitive edge in a global market defined by efficiency.
+
+The panelists included:
+- Andrew Hjuler Crichton, Generalsekretær, Advokatsamfundet
+
+- Laura Jeffords Greenberg, Head of Wordsmith AI Academy
+
+- Marlene Winther Plas, Partner, Head of IPT, DLA Piper Denmark
+
+- Benedikte Bolvig Lund, Vice Chairman, Djøf Advokat
+
+- Lena Ernlund Malmberg, Partner - Head of NewLaw | PwC Legal Business Solutions | PwC Denmark
+
+- Martin André Dittmer, Managing Partner, Gorrissen Federspiel
+
+- Christina Bruun Geertsen, Managing Partner, Kromann Reumert
+
+- Stine Mangor Tornmark, Co-founder and CEO, legaltech-startup Openli
+
+- Cathrine Wollenberg Zittan, Partner/lawyer, Poul Schmith Kammeradvokaten
+
+      `}],[]);(0,_.useEffect)(()=>{let e=()=>{let e=window.location.hash;if(e.startsWith(`#article/`)){let t=e.replace(`#article/`,``);i.find(e=>e.id===t)?r(t):(window.history.replaceState(null,``,window.location.pathname),r(null))}else e===`#privacy-policy`?l(!0):(r(null),l(!1))};return e(),window.addEventListener(`hashchange`,e),()=>window.removeEventListener(`hashchange`,e)},[i]);let a=e=>{r(e),window.history.replaceState(null,``,`#article/${e}`)},o=()=>{r(null),window.history.pushState(null,``,window.location.pathname)},s=n?i.find(e=>e.id===n):null,[c,l]=(0,_.useState)(!1);return(0,S.jsxs)(`div`,{className:`bg-white`,children:[(0,S.jsx)(te,{setActiveSection:t,onGoHome:o,currentArticleId:n}),(0,S.jsx)(`main`,{children:c?(0,S.jsx)(se,{onGoHome:()=>{l(!1),window.history.pushState(null,``,window.location.pathname)}}):s?(0,S.jsx)(ee,{article:s,onGoHome:o}):(0,S.jsxs)(S.Fragment,{children:[(0,S.jsx)(`title`,{children:`Legal Lakrids | Scandinavian Legal Events & Insights`}),(0,S.jsx)(`meta`,{name:`description`,content:`Legal Lakrids is the essential platform for legal professionals in Scandinavia, offering expert analysis, critical commentary, and events in Copenhagen and beyond.`}),(0,S.jsx)(ne,{}),(0,S.jsx)(w,{children:(0,S.jsx)(T,{})}),(0,S.jsx)(w,{children:(0,S.jsx)(ae,{})}),(0,S.jsx)(w,{children:(0,S.jsx)(ie,{articles:i,onArticleSelect:a})}),(0,S.jsx)(w,{children:(0,S.jsx)(re,{})}),(0,S.jsx)(w,{children:(0,S.jsx)(oe,{})})]})}),(0,S.jsx)(ce,{setActiveSection:t,onPrivacyPolicyClick:()=>{l(!0),window.history.pushState(null,``,`#privacy-policy`)}})]})}(0,g.createRoot)(document.getElementById(`root`)).render((0,S.jsx)(_.StrictMode,{children:(0,S.jsx)(le,{})}));
