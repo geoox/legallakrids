@@ -807,10 +807,10 @@ For companies active in Denmark (or across the European Union) merger checklists
     },
     {
       id: 'legal-lakrids-highlights-at-techtorget-2025-the-inevitable-integration-of-ai',
-      category: 'Competition Law',
+      category: 'Legal Events',
       title: 'Legal Lakrids Highlights at TechTorget 2025: The Inevitable Integration of AI',
       summary: 'At TechTorget 2025, Legal Lakrids explored the transformative impact of AI on the legal landscape, emphasizing the need for adaptation and ethical considerations in this rapidly evolving field.',
-      author: 'Lou',
+      author: 'Cristina',
       date: '2025-10-30',
       imageUrl: 'https://images.unsplash.com/photo-1560439514-4e9645039924?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2070',
       content: `
