@@ -84,7 +84,7 @@ const ArticlePage = ({ article, onGoHome }) => {
       <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
 
       <div className="pt-24 bg-white min-h-screen">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-4">
           <div className="max-w-4xl mx-auto">
             <button
               onClick={onGoHome}
@@ -785,15 +785,14 @@ export default function App() {
       imageUrl: 'https://freerangestock.com/sample/169061/close-up-of-yellow-and-black-road-markings.jpg',
       content: `On August 26th and 27th, the **Danish Competition and Consumer Authority (DCCA)** issued its first two decisions exercising their "call-in" power for mergers that fall below the thresholds of Article 12(1) of the Danish Competition Act (DCA).
 
-The recently amended [Article 12 DCA (paragraph 6)](https://en.kfst.dk/media/s4ybfdap/the-danish-competition-act-1150-af-03112024.pdf) grants the DCCA power to require notification of mergers that fall below the "regular" thresholds established in its first paragraph, when: (i) the parties' combined Danish turnover exceeds DKK 50 million (≈ €6.5 m), and (ii) the deal risks significantly impeding effective competition.
+The recently amended [Article 12 DCA (paragraph 6)](https://en.kfst.dk/media/s4ybfdap/the-danish-competition-act-1150-af-03112024.pdf) grants the DCCA power to require notification of mergers that fall below the “regular” thresholds established in its first paragraph, when: (i) the parties’ combined Danish turnover exceeds DKK 50 million (≈ €6.5 m), and (ii) the deal risks significantly impeding effective competition. 
 
-Once the DCCA becomes “aware” of a merger, they have 15 working days to decide whether to call it in, and no later than three months after signing (extendable to six after closing in exceptional cases). In the Uber/Dantaxi case, although the merger had been closed since May, the DCCA decided that it raised enough competition concerns in the taxi dispatch and transport markets to require notification three months later. Ann Sofie Vrang, Head of Division at the DCCA, shared with us that the Danish authority considers to be aware of a merger once they have received sufficient information to decide on whether to call-in or not. In Uber/Dantaxi, the merger was closed shortly after signature, and the DCCA didn’t have the necessary information until August to call them in. 
+Once the DCCA becomes “aware” of a merger, they have 15 working days to decide whether to call it in, and no later than three months after signing (extendable to six after closing in exceptional cases). In the Uber/Dantaxi case, although the merger had been closed since May, the DCCA decided that it raised enough competition concerns in the taxi dispatch and transport markets to require notification three months later. Ann Sofie Vrang, Head of Division at the DCCA, shared with us that the Danish authority is aware of a merger once they have received sufficient information to call-in or not. In Uber/Dantaxi, the merger was closed shortly after signature, and the DCCA didn’t have the necessary information until August to call them in. 
 
-This follows a broader trend across national authorities in the EU toward increased scrutiny of below-threshold mergers, and is likely due to both a gap left by the [CJEU Illuma/Grail](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:62022CJ0611) judgement (on the application of Article 22 EUMR), and a growing awareness that, under regular thresholds, innovation-driven deals could escape review despite harming competition. Nevertheless, in their most recent call-in decision (OneMed/Kirstine Hardam), the DCCA targeted the medical supplies/ostomy‐care products market, indicating that call-in powers will not be confined to digital or high-tech sectors.
-
+This follows a broader trend across national authorities in the EU toward increased scrutiny of below-threshold mergers, and is likely due to both a gap left by the [CJEU Illuma/Grail judgement](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:62022CJ0611) (on the application of Article 22 EUMR), and a growing awareness that, under regular thresholds, innovation-driven deals could escape review despite harming competition. Nevertheless, in their most recent call-in decision (OneMed/Kirstine Hardam), the DCCA targeted the medical supplies/ostomy‐care products market, indicating that call-in powers will not be confined to digital or high-tech sectors.
 **Key takeaways:**
 
-The Danish decisions of 26/27 August signal that below‑threshold merger control is no longer theoretical in Denmark, it’s operational. Combined with evolving EU restrictions, the message to M&A practitioners is clear: even if the regular quantitative thresholds are not met, there is a non‑negligible risk of regulatory intervention. 
+The recent Danish decisions signal that below‑threshold merger control is no longer theoretical in Denmark, it’s operational. Combined with evolving EU restrictions, the message to M&A practitioners is clear: even if the regular quantitative thresholds are not met, there is a non‑negligible risk of regulatory intervention. 
 
 For companies active in Denmark (or across the European Union) merger checklists should therefore include:
 
@@ -803,7 +802,11 @@ For companies active in Denmark (or across the European Union) merger checklists
 
 - **For deals already closed** (like the Uber case), calling‑in may lead to stand‑still obligations (or even unwinding risks),  reinforcing that deal clearance processes must factor in below‑threshold risk.
 
-**Particularly relevant for SPA / transaction timeline planning**: (i) possible notification requirement, (ii) standstill implications, (iii) timeline delays.`
+**Particularly relevant for SPA / transaction timeline planning**: (i) possible notification requirement, (ii) standstill implications, (iii) timeline delays.
+    
+[Competition Authority Requires Uber and Dantaxi Merger to Be Notified](https://en.kfst.dk/nyheder/kfst/english/decisions/2025/20250826-competition-authority-requires-uber-and-dantaxi-merger-to-be-notified)
+    [Competition Authority Requires Notification of OneMed and Kirstine Hardam Merger](https://en.kfst.dk/nyheder/kfst/english/decisions/2025/20250827-competition-authority-requires-notification-of-onemed-and-kirstine-hardam-merger)  
+    `
     },
     {
       id: 'legal-lakrids-highlights-at-techtorget-2025-the-inevitable-integration-of-ai',
@@ -849,6 +852,41 @@ The panelists included:
 
       `,
     },
+    {
+      title: 'Legal Lakrids highlights at "Google 15 Years On – Key Learnings, Antitrust Challenges, and the Road Ahead"',
+      id: 'legal-lakrids-highlights-at-google-15-years-on-key-learnings-antitrust-challenges-and-the-road-ahead',
+      category: 'Legal Events',
+      author: 'Lou',
+      date: '2025-11-04',
+      imageUrl: 'https://images.unsplash.com/photo-1482881497185-d4a9ddbe4151?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1065',
+      summary: 'The Copenhagen Competition Law Lab hosted a colloquium on the Google Shopping case, fifteen years after the European Commission’s official initiation of proceedings against Google.',
+      content: `
+      Last Monday at CBS Law Faculty, the Copenhagen Competition Law Lab hosted a colloquium on the Google Shopping case, fifteen years after the European Commission’s [official initiation of proceedings](https://ec.europa.eu/competition/antitrust/cases/dec_docs/39768/39768_430_6.pdf) against Google. Although the case was resolved by the European Court of Justice (ECJ) in 2024, follow-on litigation is ongoing.
+
+      **Lawrence B. Landman**, Senior Vice President at Lateral Link’s Bridgeline Solutions and Director of its Antitrust Division, introduced the event by recalling that the [Google Shopping decision](https://ec.europa.eu/competition/antitrust/cases/dec_docs/39740/39740_14996_3.pdf) was among the first to find any infringement from Google (second only to a 2016 decision by Russia’s Federal Antimonopoly Service), and since then almost every jurisdiction has opened an investigation into their conduct. 
+
+      **Paul L. Csizár**, Senior Advisor at Brunswick and former Director at DG COMP, opened the discussion by highlighting the relevance of timeliness for **effective remedies** - the “holy grail” of antitrust. Csizár commented on how the European Commission cannot afford to take five years (as they reportedly do now), if they want to avoid their decisions becoming obsolete before enforcement. 
+
+      Csizár gave a brief overview of the original investigation led by Commissioner Alumnia, and the four original areas of concern: self-preferencing, content scraping, advertising exclusivity, and data portability. Once Vestager took charge as the European Commissioner for Competition, she reviewed the [tentative settlement](https://ec.europa.eu/competition/antitrust/cases/dec_docs/39740/39740_8608_5.pdf), narrowed the investigation to comparison shopping services, and imposed a €2.42 billion fine for self-preferencing in 2017, which was upheld through all appeals until [the 2024 ECJ judgment](https://curia.europa.eu/juris/document/document.jsf?text=&docid=289925&pageIndex=0&doclang=en&mode=req&dir=&occ=first&part=1&cid=918179). 
+
+      **Christian Bergqvist**, Associate Professor at Copenhagen University, followed with a dynamic presentation on the broader concerns behind Google’s conduct. He concluded with a warning that Google’s competitive pressure to train its AI (especially from rival OpenAI’s ChatGPT) could imply IP infringements.
+      
+      After a short break, **Yuka Aoyagi**, Professor at Hosei University and Visiting Fellow at the European University Institute, analysed the Japanese approach to Google’s conduct. She discussed the evolving dynamics of digital markets in Japan and the implications for global enforcement.
+      
+      **John M. Yun**, Professor at George Mason University, critiqued [the U.S. Federal Trade Commission’s (FTC) consideration](https://www.ftc.gov/system/files/documents/public_statements/295971/130103googlesearchstmtofcomm.pdf) of Google’s self-preferencing in Search as "procompetitive." In 2024, [a US district court shifted the focus](https://files.lbr.cloud/public/2024-08/045110819896.pdf?VersionId=mHMw8uSvPbFCwl.7.yAY8wRXM0.UCmrD%23page=8) from self preferencing to the exclusivity of Google’s distribution agreements and the “power of defaults;” including a 22-year-old agreement with Apple of USD 20 billion in yearly payments, feature limits, and a Right of First Refusal on Apple’s ad ambitions.
+
+      **Alfonso Lamadrid**, Antitrust and Competition Partner at Latham & Watkins, talked about the **Google Android** case, examining Google’s practices of (i) requiring manufacturers to preinstall Google Search and Chrome, (ii) paying manufacturers and mobile operators to preinstall Google Search exclusively, and (iii) restricting the development of alternative open-source versions of Android. Divergent from the FTC’s interpretation, the EU analysis centered on whether these practices had exclusionary effects regardless of any alleged countervailing efficiencies. In light of the Court’s decision to exempt the as-efficient competitor test (AEC) from their assessment of preinstallation obligations [(par 777 to 788)](https://curia.europa.eu/juris/document/document.jsf?text=&docid=265421&pageIndex=0&doclang=EN&mode=lst&dir=&occ=first&part=1&cid=11519767), Lamadrid raised a question on the applicability of AEC to tying cases. 
+      
+      **Jorge Padilla**, Partner at Compass Lexecon, discussed private enforcement and Google’s role in the AdTech sector. He noted that Google simultaneously acts as a buyer, seller, and operator of the digital advertising marketplace, a structure many enforcers, including DG COMP and the U.S. Department of Justice, view as a conflict of interest. While only the [French Competition Authority](https://www.autoritedelaconcurrence.fr/fr/decision/relative-des-pratiques-mises-en-oeuvre-dans-le-secteur-de-la-publicite-sur-internet-0) has formally found an infringement so far, several damages claims have already been filed.
+
+      **Fernando Castillo de la Torre**, Competition team Director in the European Commission Legal Service, discussed the recent [Android Auto case](https://curia.europa.eu/juris/document/document.jsf?text=&docid=295687&pageIndex=0&doclang=EN&mode=req&dir=&occ=first&part=1&cid=654147), where Google denied access to JuicePass, an electrical vehicle charging app. The ECJ held that the traditional test of “indispensability” does not apply to platforms designed to host third-party apps, in which case evidence of capability to restrict competition is sufficient - even in dynamic markets without clearly defined downstream markets. Justifications may include safety or technical reasons, but firms should pursue alternatives under a “fair and proportionate” standard.
+
+      **Johannes Wick**, counsel at Geradin Partners, discussed the procedural technicalities behind civil litigation against Google across the EU, while Stijn Huijts, also of Geradin Partners, talked about Google’s use of third-party content in both search results and AI products, potentially straddling IP and antitrust boundaries.
+
+      Finally, **Giorgio Monti**, Professor at Tilburg Law School, outlined the challenges the Digital Markets Act faces in regulating Google and other gatekeepers, and offered recommendations to improve the regulatory dialogue.
+
+      `
+    }
   ], []); // Empty dependency array since articles are static
 
   // Handle deep linking on page load and URL changes
