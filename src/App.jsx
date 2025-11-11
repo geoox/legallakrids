@@ -85,7 +85,7 @@ const ArticlePage = ({ article, onGoHome }) => {
 
       <div className="pt-24 bg-white min-h-screen">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto pb-16">
             <button
               onClick={onGoHome}
               className="mb-8 cursor-pointer inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors font-medium"
@@ -775,6 +775,48 @@ export default function App() {
 
   // Memoize articles to prevent unnecessary re-renders
   const articles = useMemo(() => [
+    {
+      title: 'Accura Open House with Legal Lakrids',
+      author: 'Cristina',
+      id: 'accura-open-house-with-legal-lakrids',
+      category: 'Events',
+      date: '2025-11-12',
+      imageUrl: 'https://images.unsplash.com/photo-1515169067868-5387ec356754?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2070',
+      summary: 'Accura Open House Event provided ambitious students and recent graduates with an honest insight into the dynamic life of a lawyer within one of Denmark\'s leading law firms.',
+      content: `
+      Last week, Legal Lakrids had the pleasure of attending the Accura Open House Event, an occasion tailored for ambitious students and recent graduates. The event offered an unparalleled, honest insight into the dynamic and multifaceted life of a lawyer, assistant attorney, or student within one of Denmark's preeminent law firms. It served as a crucial bridge for the next generation of legal professionals, providing a realistic glimpse into the demands and rewards of a career in law.
+
+Organized by ElsaCopenhagen, the event was strategically designed to foster meaningful connections and facilitate candid discussions. Attendees were granted direct access to Accura's diverse and experienced employees, spanning an impressive breadth of 13 specialized areas of law. This direct interaction provided an exceptional opportunity for participants to engage in substantive discussions and receive personalized guidance on a wide array of critical topics. These included advice on navigating the complexities of the job search, refining thesis and bachelor writing skills, understanding the nuances of exchange and secondment programs, and exploring the international opportunities available within the global legal landscape. 
+
+The atmosphere was vibrant and engaging, with Accura's lawyers dedicating their time to interact directly with the attendees. They readily answered questions about their current projects, offering detailed accounts of their day-to-day responsibilities and the intellectual challenges they encounter.
+
+This Open House Event proved to be an exceptionally beneficial experience for the audience. It offered a profound opportunity to gain a deeper understanding of the exacting standards and diverse skills required to thrive as a lawyer in a leading international law firm. Crucially, the event also provided a platform for attendees to articulate their motivations and aspirations directly to Accura’s lawyers, potentially forging connections that could lead to future career opportunities. This was particularly pertinent given that Accura had already opened its application portal, making the event a timely and strategic avenue for talent acquisition.
+
+In a forward-thinking addition this year, a dedicated stand was established to provide advice on leveraging LinkedIn. Guests received tailored guidance on how to effectively utilize the professional networking platform to build and strengthen their profiles, connect with industry leaders, and discover new opportunities. 
+
+The Accura Open House Event thus stood as a comprehensive and highly effective platform for both recruitment and professional development, solidifying Accura's reputation as a firm committed to cultivating future legal talent.
+
+
+      `,
+    },
+    {
+      title: 'Breakfast with Martin Sheinin over international legal theory - and practice',
+      id: 'breakfast-with-martin-sheinin-over-international-legal-theory-and-practice',
+      category: 'International Law',
+      summary: 'Breakfast evolved from a presentation on how facts and norms interact in international law, to a conversation on the current applications of these theories in today’s delicate political climate.',
+      date: '2025-11-10',
+      imageUrl: 'https://images.unsplash.com/photo-1623334044303-241021148842?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2070',
+      author: 'Lou',
+      content: `
+      Martin Sheinin, renowned expert in Human Rights Law, delighted University of Copenhagen community members and guests with a lecture on the separation of facts and norms in international law. Sheinin spoke about the use and categorization of sources of international law, and “norm formulations.” In the absence of an established hierarchy of norms, he argued that legal reasoning in international law should follow a “bottom-up” rather than a “top-down” approach, allowing the facts of the case to narrow the scope of applicable law. 
+
+The conversation evolved into a rich discussion on different schools of legal thought. Scheinin reflected on how positivism, as developed during the Napoleonic era, relies on normative coherence; hermeneutics, by contrast, are satisfied with mere persuasion; while legal realism tends to overly compromise the distinction between laws and norms, allowing power to dictate law. A tangible example of legal realism, Sheinin noted, is the European Court of Human Rights considering State practices as lawful solely because they are lawful under their own jurisdictions, since States are “masters of the truth.”
+
+Once Scheinin opened the floor, attendees started a lively debate on the International Court of Justice’s reference to the [ICRC’s customary international humanitarian law study](https://ihl-databases.icrc.org/en/customary-ihl/v1) in its recent [Advisory Opinion on Israel’s Obligations in Occupied Palestinian Territory](https://www.icj-cij.org/case/196). The group generally agreed that the study would be relevant insofar as it accurately reflected State practice, and noted that, in this case, its true value laid in compelling States to respond to it during the proceedings.
+
+The last question to Martin was on Hungary’s noncompliance with Netanyahu’s arrest warrant. In this case, the Hungarian government argued that the Rome Statute is not incorporated into Hungarian national law. The attendee who posed the question noted that in this day and age, it appears positivism and normative coherence are on the low, and that human rights are becoming no longer self-explanatory. To which Martin answered, **“don’t predict the future!”** 
+      `,
+    },
     {
       id: 'quick-must-knows-on-the-danish-and-eu-stricter-merger-control',
       category: 'Competition Law',
