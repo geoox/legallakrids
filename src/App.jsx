@@ -752,7 +752,7 @@ const Footer = ({ setActiveSection, onPrivacyPolicyClick }) => {
                 <h3 className="text-sm font-semibold text-gray-200 tracking-wider uppercase">Legal</h3>
                 <ul className="mt-4 space-y-4">
                   <li><a href="#privacy" onClick={(e) => { e.preventDefault(); onPrivacyPolicyClick(); }} className="text-base text-gray-300 hover:text-white cursor-pointer">Privacy Policy</a></li>
-                  <li><a href="#" className="text-base text-gray-300 hover:text-white">Terms of Service</a></li>
+                  {/* <li><a href="#" className="text-base text-gray-300 hover:text-white">Terms of Service</a></li> */}
                 </ul>
               </div>
             </div>
