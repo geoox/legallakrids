@@ -383,7 +383,7 @@ const Blog = ({ articles, onArticleSelect }) => {
           </p>
         </div>
         <div className="mt-16 grid gap-12 max-w-lg mx-auto lg:grid-cols-3 lg:max-w-none">
-          {articles.map((article) => (
+              {articles && [...articles].sort((a, b) => new Date(b.date) - new Date(a.date)).map((article) => (
             <div
               key={article.id}
               onClick={() => onArticleSelect(article.id)}
