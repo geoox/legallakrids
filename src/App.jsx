@@ -106,7 +106,7 @@ const ArticlePage = ({ article, onGoHome }) => {
                 onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/1200x600/e2e8f0/4a5568?text=Image+Not+Found`; }}
               />
               <div
-                className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6"
+                className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6 text-justify"
                 dangerouslySetInnerHTML={{
                   __html: '<p>' + article.content
                     .replace(/"([^"]+)"/g, '<span class="italic">$1</span>') // 1. Italicize quotes (MUST run before links)
@@ -614,7 +614,7 @@ const PrivacyPolicyPage = ({ onGoHome }) => {
           </button>
           <article>
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-8 tracking-tight">Privacy Policy</h1>
-            <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6">
+            <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6 text-justify">
               <p className="text-gray-600">Last Updated: 24.10.2025</p>
               
               <p className="mt-6">
@@ -775,6 +775,61 @@ export default function App() {
 
   // Memoize articles to prevent unnecessary re-renders
   const articles = useMemo(() => [
+    {
+      title: 'Danish M&A Pulse: Market Overview',
+      author: 'Cristina',
+      date: '2025-11-19',
+      id: 'danish-ma-pulse-market-overview',
+      category: 'Mergers & Acquisitions',
+      imageUrl: 'https://images.unsplash.com/photo-1506787497326-c2736dde1bef?q=80&w=992&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      summary: 'The Danish M&A market has shown resilience and adaptability in the face of global economic uncertainties, with a notable increase in deal activity and strategic investments across various sectors.',
+      content: `
+      The Danish mergers and acquisitions landscape maintained its strong activity level through the second half of 2025, driven primarily by themes of digital transformation, sector consolidation, and strategic expansion. Despite global macroeconomic uncertainties, the Nordic market's stability and strong pool of private equity dry powder continued to fuel deal flow. The Financial Services, Technology, and Automotive sectors witnessed some of the most significant and transformative transactions, establishing strong foundations for the 2026 market.
+
+      **Transactions Overview**
+      
+      1. Financial Services: The Mega-Merger to Create AL Sydbank
+
+      → **Transaction:** Merger Agreement
+      → **Acquirer/Surviving Entity:** Sydbank
+      → **Target Entities:** Arbejdernes Landsbank and Vestjysk Bank
+      → **Details:** Announced in late October 2025, this three-way merger is set to create AL Sydbank, positioning it as one of Denmark’s five largest financial institutions. The deal structure aims to combine the local roots of the three banks into a nationwide entity.
+      → **Strategic Impact:** This deal signals a major consolidation phase within the highly competitive Danish banking sector, focusing on creating a powerhouse capable of competing with larger Nordic players.
+      → [Source](https://www.globenewswire.com/news-release/2025/10/27/3174315/0/en/Sydbank-Arbejdernes-Landsbank-and-Vestjysk-Bank-enter-into-merger-agreement.html)
+
+      2. Technology (GRC Software): Keensight Capital Acquires Decision Focus
+
+      → **Transaction:** Majority Acquisition
+      → **Acquirer:** Keensight Capital (European Growth Buyout Firm)
+      → **Target:** Decision Focus (Governance, Risk & Compliance Software)
+      → **Details:** French private equity firm Keensight Capital acquired a majority stake in Danish-headquartered **Decision Focus** from **VIA equity**. Decision Focus is a key provider of a no-code Governance, Risk, and Compliance (GRC) software platform, primarily serving the financial services and insurance industries globally. The transaction was reportedly valued at nearly **DKK 1 billion**.
+      → **Strategic Impact:** This deal highlights the strong global investor appetite for Nordic B2B SaaS companies
+      → [Source](https://keensight.com/keensight-capital-signs-an-agreement-to-acquire-decision-focus-a-leading-governance-risk-compliance-software-developer/)
+
+      3. Industrial Distribution: Solar's Strategic Norwegian Expansion
+
+      → **Transaction:** Acquisition
+      → **Acquirer:** Solar A/S (Denmark)
+      → **Target:** Sonepar Norge AS (Norway)
+      → **Details:** Danish sourcing and services company Solar agreed to acquire 100% of Sonepar Norge, a Norwegian B2B distributor of electrical materials, for an enterprise value of DKK 315 million. Sonepar Norge, a subsidiary of the French Sonepar Group, has an annual revenue of approximately DKK 700 million.
+      → **Strategic Impact:** The acquisition is a bolt-on transaction designed to be transformative for Solar’s Norwegian operations. 
+      → [Source](https://investorshangout.com/solar-as-announces-share-offering-and-strategic-acquisition-moves-454569-/)
+
+      4. Automotive & Transport: Semler Group Enters Heavy Transport
+
+      → **Transaction:** Acquisition
+      → **Acquirer:** Semler Gruppen A/S (Denmark)
+      → **Target:** MAN Truck & Bus Danmark A/S
+      → **Details:** Denmark's largest automotive group, Semler Gruppen (importer of VW, Audi, etc.), acquired MAN Truck & Bus Danmark, the Danish importer and distributor for MAN and Neoplan trucks, vans, and buses. The move marks Semler’s strategic entry into the heavy transport segment and strengthens its existing van business. The transaction is pending approval by competition authorities.
+      → **Strategic Impact:** This acquisition is part of Semler’s broader strategy to diversify its mobility portfolio and secure a leading position in the commercial vehicle market, aligning with the industry's shift toward sustainable transport solutions.
+      → [Source](https://accura.dk/en/cases/semler-gruppen-acquires-man-truck-bus-danmark/)
+
+      **Conclusion: Momentum into the New Year**
+
+      The M&A activity across the latter half of 2025 demonstrates the **resilience and strategic depth** of the Danish corporate sector. Financial services consolidation, the continued growth of the TMT sector via private equity backing, and industrial players seeking to bolster their regional market shares were key themes. As these newly merged and acquired entities enter 2026, the focus will shift from deal completion to **successful integration**, with the goal of unlocking the significant synergies and market opportunities that underpinned these high-profile transactions. 
+
+      `
+      },
     {
       title: 'Accura Open House with Legal Lakrids',
       author: 'Cristina',
