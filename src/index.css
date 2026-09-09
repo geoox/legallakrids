@@ -131,6 +131,48 @@ p {
   transform: translateY(-2px);
 }
 
+.article-content {
+  color: #44413b;
+  font-family: 'Lora', serif;
+  font-size: clamp(1.05rem, 1.4vw, 1.16rem);
+  line-height: 1.9;
+}
+
+.article-content p + p {
+  margin-top: 1.65em;
+}
+
+.article-content strong {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.article-content a {
+  color: var(--color-accent-dark);
+  font-weight: 600;
+  text-decoration-color: rgba(154, 116, 65, 0.45);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition:
+    color 200ms ease,
+    text-decoration-color 200ms ease;
+}
+
+.article-content a:hover {
+  color: var(--color-ink);
+  text-decoration-color: var(--color-ink);
+}
+
+.article-content ul {
+  margin: 1.5em 0;
+  padding-left: 1.4em;
+  list-style: disc;
+}
+
+.article-content li + li {
+  margin-top: 0.65em;
+}
+
 ::view-transition-group(article-image) {
   z-index: 10;
   animation-duration: 650ms;
