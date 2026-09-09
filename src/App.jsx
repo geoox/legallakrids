@@ -744,6 +744,89 @@ const Blog = ({ articles, onArticleSelect, transitioningArticleId }) => {
 const Events = () => {
   const events = [
     {
+      title: 'CAD - Copenhagen Arbitration Days',
+      date: '2026-10-03',
+      time: 'All day',
+      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />
+    },
+    {
+      title: 'Legal and non-legal norms in AI systems for decision making in public administration',
+      date: '2026-09-30',
+      endAt: '2026-09-30T13:00:00+02:00',
+      time: '12:00–13:00',
+      location: '🇩🇰 South Campus, room 4A.1.46',
+      description: 'The use of semi-automated and fully automated administrative decision-making systems may challenge legal compliance in a deep sense.',
+      icon: <Icon path="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+    },
+    {
+      title: 'Law and Security',
+      date: '2026-09-27',
+      time: 'All day',
+      location: '🇩🇰 University of Copenhagen',
+      icon: <Icon path="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-1a6 6 0 00-5.197-5.803" />
+    },
+    {
+      title: 'International Citizen Days',
+      date: '2026-09-25',
+      endDate: '2026-09-26',
+      time: 'All day',
+      icon: <Icon path="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-1a6 6 0 00-5.197-5.803" />
+    },
+    {
+      title: 'International Lawyers Network - Meet',
+      date: '2026-09-23',
+      endAt: '2026-09-23T20:00:00+02:00',
+      time: '17:00–20:00',
+      location: '🇩🇰 GoGift, Strandgade 4, 1401 Copenhagen',
+      description: 'International Lawyers Network meeting at GoGift’s offices.',
+      icon: <Icon path="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-1a6 6 0 00-5.197-5.803" />
+    },
+    {
+      title: 'New Legal Challenges in a Globalized World and Legislative Responses',
+      date: '2026-09-21',
+      endAt: '2026-09-21T16:30:00+02:00',
+      time: '09:15–16:30',
+      location: '🇩🇰 CBS Law, Porcelænshaven 18B, room 1.154, Frederiksberg',
+      description: 'A full-day programme on European vulnerabilities, private international law, sanctions, risk-based compliance, product liability, the Data Act and GDPR.',
+      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />,
+      hrefLink: 'https://www.cbs.dk/en/events/new-legal-challenges-globalized-world-and-legislative-responses'
+    },
+    {
+      title: 'Something Old, Something New, Something Pending Appeal: Theories of Harm in EU Merger Review',
+      date: '2026-09-16',
+      endAt: '2026-09-16T17:00:00+02:00',
+      time: '13:00–17:00',
+      location: '🇩🇰 Råvarebygningen, Porcelænshaven 7, room PHRs20',
+      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008zm0 5.25h.007v.008H3.75v-.008z" />
+    },
+    {
+      title: 'After-work event: Diversity and inclusion – from feel-good to good business',
+      date: '2026-09-14',
+      endAt: '2026-09-14T16:30:00+02:00',
+      time: '14:30–16:30',
+      location: '🇩🇰 CBS, Dalgas Have 15, 2000 Frederiksberg',
+      description: 'A discussion with diversity and inclusion experts from academia, business and civil society.',
+      icon: <Icon path="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-1a6 6 0 00-5.197-5.803" />
+    },
+    {
+      title: 'Pro Bono Power: How Commercial Law Firms Reconstruct International Law and Compliance',
+      date: '2026-09-09',
+      endAt: '2026-09-09T13:15:00+02:00',
+      time: '12:15–13:15',
+      location: '🇩🇰 South Campus, room 8A.0.57 (Flexroom) and online',
+      description: 'iCourts Lunch Seminar with Nina Reiners.',
+      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />
+    },
+    {
+      title: '"Law as Engineering"',
+      date: '2026-09-08',
+      endAt: '2026-09-08T12:00:00+02:00',
+      time: '11:00–12:00',
+      location: '🇩🇰 MOBILE meeting room 6B-2-22, Southern Campus',
+      description: 'Professor David Howarth invites us to rethink the role of lawyers and the nature of legal work.',
+      icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />
+    },
+    {
       title: 'TechTorget Danmark',
       date: '2025-10-08',
       location: '🇩🇰 Copenhagen, Denmark',
@@ -797,7 +880,8 @@ const Events = () => {
   const sortedEvents = events
     .map((event) => {
       const eventDate = new Date(`${event.date}T23:59:59`);
-      return { ...event, isPast: eventDate < today, eventDate };
+      const eventEnd = event.endAt ? new Date(event.endAt) : eventDate;
+      return { ...event, isPast: eventEnd < today, eventDate };
     })
     .sort((a, b) => {
       if (a.isPast !== b.isPast) {
@@ -823,6 +907,10 @@ const Events = () => {
               .toUpperCase();
             const day = new Intl.DateTimeFormat('en', { day: '2-digit' })
               .format(event.eventDate);
+            const endDay = event.endDate
+              ? new Intl.DateTimeFormat('en', { day: '2-digit' })
+                  .format(new Date(`${event.endDate}T23:59:59`))
+              : null;
             const year = event.eventDate.getFullYear();
 
             return (
@@ -836,7 +924,9 @@ const Events = () => {
                     className="flex h-20 w-20 flex-col items-center justify-center rounded-2xl bg-stone-950 text-white shadow-lg"
                   >
                     <span className="text-[0.65rem] font-bold tracking-[0.18em] text-white/65">{month}</span>
-                    <span className="font-serif text-3xl font-semibold leading-none">{day}</span>
+                    <span className={`${endDay ? 'text-xl' : 'text-3xl'} font-serif font-semibold leading-none`}>
+                      {endDay ? `${day}–${endDay}` : day}
+                    </span>
                     <span className="mt-1 text-[0.65rem] text-white/65">{year}</span>
                   </time>
                   <div>
@@ -848,7 +938,8 @@ const Events = () => {
                       }`}>
                         {event.isPast ? 'Past event' : 'Upcoming'}
                       </span>
-                      <span className="text-xs text-stone-500">{event.location}</span>
+                      {event.time && <span className="text-xs font-semibold text-stone-600">{event.time}</span>}
+                      {event.location && <span className="text-xs text-stone-500">{event.location}</span>}
                     </div>
                     <div className="mt-3 flex items-start gap-3">
                       <span className="mt-1 hidden text-[#9a7441] sm:block">
@@ -856,20 +947,24 @@ const Events = () => {
                       </span>
                       <div>
                         <h3 className="text-xl font-semibold leading-snug text-stone-950">{event.title}</h3>
-                        <p className="mt-2 text-sm leading-6 text-stone-600">{event.description}</p>
+                        {event.description && (
+                          <p className="mt-2 text-sm leading-6 text-stone-600">{event.description}</p>
+                        )}
                       </div>
                     </div>
                   </div>
-                  <a
-                    href={event.hrefLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="primary-button w-full gap-2 md:w-auto"
-                    aria-label={`Read more about ${event.title} (opens in a new tab)`}
-                  >
-                    Read more
-                    <Icon path="M13.5 4.5H19.5V10.5M19 5L10 14M6.75 6.75H5.25A2.25 2.25 0 003 9V18.75A2.25 2.25 0 005.25 21H15A2.25 2.25 0 0017.25 18.75V17.25" className="h-4 w-4" />
-                  </a>
+                  {event.hrefLink && (
+                    <a
+                      href={event.hrefLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="primary-button w-full gap-2 md:w-auto"
+                      aria-label={`Read more about ${event.title} (opens in a new tab)`}
+                    >
+                      Read more
+                      <Icon path="M13.5 4.5H19.5V10.5M19 5L10 14M6.75 6.75H5.25A2.25 2.25 0 003 9V18.75A2.25 2.25 0 005.25 21H15A2.25 2.25 0 0017.25 18.75V17.25" className="h-4 w-4" />
+                    </a>
+                  )}
                 </div>
               </article>
             );
