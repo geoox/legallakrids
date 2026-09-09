@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef, useMemo } from 'react';
 import { flushSync } from 'react-dom';
 import heroVideo from './assets/videos/hero-video.mp4';
 import logo from './assets/images/logo.png';
@@ -70,9 +70,9 @@ const ArticlePage = ({ article, onGoHome, relatedArticles, onRelatedArticleSelec
   const [readingProgress, setReadingProgress] = useState(0);
   const [shareStatus, setShareStatus] = useState('');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     scrollInstantlyTo(0);
-  }, [article]);
+  }, [article.id]);
 
   useEffect(() => {
     const updateReadingProgress = () => {
@@ -94,7 +94,7 @@ const ArticlePage = ({ article, onGoHome, relatedArticles, onRelatedArticleSelec
       window.removeEventListener('scroll', updateReadingProgress);
       window.removeEventListener('resize', updateReadingProgress);
     };
-  }, [article]);
+  }, [article.id]);
 
   useEffect(() => {
     if (!shareStatus) {
