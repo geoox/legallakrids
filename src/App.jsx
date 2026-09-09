@@ -482,6 +482,7 @@ const Header = ({
 const Hero = () => {
   const [videoError, setVideoError] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const heroRef = useRef(null);
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -493,9 +494,26 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 0.8;
+    const heroElement = heroRef.current;
+    const videoElement = videoRef.current;
+    if (!heroElement || !videoElement) {
+      return;
     }
+
+    videoElement.playbackRate = 0.8;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          videoElement.play().catch(() => setVideoError(true));
+        } else {
+          videoElement.pause();
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(heroElement);
+    return () => observer.disconnect();
   }, [prefersReducedMotion]);
 
   const fallbackImageUrl = "https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?q=80&w=2070&auto=format&fit=crop";
@@ -504,6 +522,7 @@ const Hero = () => {
 
   return (
     <section
+      ref={heroRef}
       id="home"
       className="relative flex h-[100svh] min-h-[680px] items-center justify-center overflow-hidden bg-cover bg-center text-center"
       style={{ backgroundImage: `url(${fallbackImageUrl})` }}
@@ -511,7 +530,6 @@ const Hero = () => {
       {shouldShowVideo && (
         <video
           ref={videoRef}
-          autoPlay
           loop
           muted
           playsInline
@@ -1438,7 +1456,7 @@ The panelists included:
 
     if (!document.startViewTransition || prefersReducedMotion) {
       update();
-      return;
+      return null;
     }
 
     flushSync(() => setTransitioningArticleId(articleId));
@@ -1450,6 +1468,7 @@ The panelists included:
       setTransitioningArticleId(null);
     };
     transition.finished.then(cleanUpTransition, cleanUpTransition);
+    return transition;
   };
 
   const handleArticleSelect = (id) => {
@@ -1479,7 +1498,6 @@ The panelists included:
       const homeScrollY = window.history.state.homeScrollY;
 
       const returnToArticleCard = () => {
-        window.history.back();
         flushSync(() => {
           setCurrentArticleId(null);
           setShowPrivacyPolicy(false);
@@ -1488,7 +1506,15 @@ The panelists included:
         scrollInstantlyTo(homeScrollY);
       };
 
-      startArticleTransition('back', articleId, returnToArticleCard);
+      const transition = startArticleTransition('back', articleId, returnToArticleCard);
+      if (transition) {
+        transition.finished.then(
+          () => window.history.back(),
+          () => window.history.back()
+        );
+      } else {
+        window.history.back();
+      }
       return;
     }
 
