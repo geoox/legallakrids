@@ -18,10 +18,19 @@ refactor.
 
 1. Read the complete source material before editing.
    - Treat the uploaded or pasted text as the factual source of truth.
+   - Identify the exact article-body boundaries established by the document. Documents
+     may also contain metadata, speaker/contact lines, social-media drafts, hashtags,
+     event listings, working notes, or outlines; none of those are article content
+     unless the user explicitly includes them.
+   - When the document labels or positions an article body between surrounding sections,
+     copy only that body. For example, if publishable paragraphs appear below a
+     “speakers” line and before “notes,” use those paragraphs verbatim and exclude both
+     boundary sections.
    - Preserve names, organizations, dates, figures, quotations, legal citations, and
      conclusions.
-   - Do not add unsupported facts or sources. If the user asks for research, verify
-     additions and retain source links.
+   - Do not add facts, sources, examples, headings, introductions, transitions,
+     conclusions, commentary, or analysis. Only research or expand the body when the
+     user explicitly asks.
    - If an attachment cannot be read, explain the blocker instead of guessing.
 
 2. Inspect the current article collection and renderer in `src/App.jsx`.
@@ -31,15 +40,15 @@ refactor.
    - Do not assume this skill's examples are newer than the code.
 
 3. Derive the article metadata.
-   - `title`: Use the document title when present. Otherwise create a concise,
-     descriptive title faithful to the draft.
+   - `title`: Use the document title exactly when present. Only create a title when the
+     source has none.
    - `id`: Convert the final title to a lowercase ASCII kebab-case slug. Remove
      punctuation and diacritics, convert `&` to `and`, collapse repeated hyphens, and
      verify that the ID is unique in `src/App.jsx`.
    - `category`: Reuse the closest existing category when appropriate. Infer a concise
      legal topic only when the source makes it unambiguous.
-   - `summary`: Write one accurate sentence, normally 140-220 characters, suitable for
-     the blog card and SEO description. Do not introduce claims absent from the source.
+   - `summary`: Use the document's thumbnail summary or equivalent text exactly when
+     present. Only write a summary when the source has none.
    - `author`: Use the author named by the user or document. If absent, inspect recent
      article authors but do not guess which person wrote the piece; ask one focused
      question.
@@ -49,22 +58,25 @@ refactor.
      supplied, find a relevant, license-safe image only when web access and attribution
      requirements permit it. Otherwise ask one focused question for an image URL.
 
-4. Edit the article for publication without changing its meaning.
-   - Correct obvious spelling, punctuation, grammar, and paragraphing.
-   - Keep the source's voice and level of legal precision.
-   - Prefer a clear opening, logically ordered body, and concise conclusion.
-   - Do not overstate legal implications or turn tentative language into certainty.
-   - Keep citations attached to the claims they support.
-   - Do not remove substantive detail merely to shorten a long source.
+4. Preserve the selected article body.
+   - Copy the designated body verbatim. Do not rewrite, polish, summarize, expand, or
+     enhance it.
+   - Preserve the source's wording, spelling, punctuation, paragraph order, legal
+     precision, and level of detail, even when an alternative phrasing seems better.
+   - Do not derive article prose from notes or outlines.
+   - Make only the mechanical escaping and paragraph-separation changes required to
+     store the text safely in the JavaScript template literal.
+   - If the user requests editorial changes, apply only the specifically requested
+     changes and identify them in the completion response.
 
 5. Convert the body to the renderer's supported markup.
    - Separate paragraphs with one blank line.
    - Use `**text**` for bold emphasis.
    - Use `[label](https://example.com)` for links.
    - Use `- ` at the beginning of each list-item line for unordered lists.
-   - Plain numbered lines and headings have no dedicated renderer support. Convert
-     headings to bold lines and numbered lists to either prose or hyphen bullets unless
-     their literal numbering is essential.
+   - Plain numbered lines and headings have no dedicated renderer support. Preserve
+     their text rather than rewriting it; ask before changing the source structure if
+     the formatting would be materially degraded.
    - Straight double-quoted spans are automatically italicized by the renderer. Prefer
      typographic quotation marks (`“...”`) for ordinary quotations; use straight quotes
      only when the site's italic behavior is intended.
@@ -96,6 +108,6 @@ or date when they can be derived by the rules above.
 ## Completion response
 
 State the published title, author, category, date, and deep link
-`#article/<article-id>`. Mention any editorially significant transformation or supplied
-placeholder explicitly. Do not claim deployment unless a deployment was requested and
-completed.
+`#article/<article-id>`. Confirm that the designated article body was copied without
+editorial expansion. Mention any user-requested transformation or supplied placeholder
+explicitly. Do not claim deployment unless a deployment was requested and completed.

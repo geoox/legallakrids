@@ -776,37 +776,21 @@ export default function App() {
   // Memoize articles to prevent unnecessary re-renders
   const articles = useMemo(() => [
     {
-      title: 'Green Hydrogen Regulation in Denmark and the EU in the Landscape of the Energy Transition',
+      title: 'Green Hydrogen Regulation in DK and the EU in the Landscape of the Energy Transition',
       author: 'Lou',
       date: '2025-11-11',
-      id: 'green-hydrogen-regulation-in-denmark-and-the-eu-in-the-landscape-of-the-energy-transition',
+      id: 'green-hydrogen-regulation-in-dk-and-the-eu-in-the-landscape-of-the-energy-transition',
       category: 'Energy Law',
       imageUrl: 'https://images.unsplash.com/photo-1558366763-f22476ba6fac?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0',
-      summary: 'Are we truly ready for green hydrogen? EU and Danish experts examine the regulatory, technical and sociopolitical challenges facing its deployment.',
+      summary: 'Are we truly ready for green hydrogen? A quick read on how the EU and DK are facing regulatory, technical and sociopolitical challenges, from industry and academic experts',
       content: `
-      Is there a present—and a future—for green hydrogen? A [course hosted by the University of Copenhagen’s Center for Climate Change Law and Governance](https://jura.ku.dk/clima/calendar/2025/course-on-green-hydrogen/) brought together environmental engineering, industry and landscape-planning perspectives to examine green hydrogen regulation within the EU’s current energy strategy and the challenges facing Denmark in particular.
+      The event brought together environmental engineers, industry and landscape planning experts to critically discuss green hydrogen regulation within the EU’s current energy strategy, and its challenges in Denmark specifically.
 
-Beatriz Martinez Romera, Simon Lex, Meng Zhang, Viktor Weber and Yair Alpuche led a critical discussion of a technology often portrayed as a silver bullet for decarbonisation. Green hydrogen avoids reliance on fossil fuels, but its large-scale deployment still faces high costs, limited infrastructure and the absence of a natural demand-side market, as well as a regulatory framework that is only beginning to take shape.
+While green hydrogen is often portrayed as a silver bullet for decarbonisation, it also faces major barriers to deployment. High costs, lack of infrastructure, and the absence of a natural demand-side market, but also a weak regulatory framework to support it. Only recently was green hydrogen acquired a legal definition as part of RFNBOs (Renewable Fuels of Non-Biological Origin), introduced by RED II (Renewable Energy Directive II), with its additional sustainability criteria of additionality (Article 5) and temporal and geographic correlation (Article 7). While green hydrogen avoids fossil fuels, it introduces new resource challenges, particularly around water use.
 
-**From policy ambition to a legal framework**
+The experts also raised the ethical question of whether regulation-compliant large-scale energy infrastructure projects should proceed despite lacking legitimacy from the local community (“Wind turbines or the bats?” ).
 
-Meng Zhang introduced the different types—or colours—of hydrogen and the EU policies intended to support the renewable form. Following Russia’s invasion of Ukraine, the 2022 REPowerEU Plan doubled the EU’s hydrogen target to 20 million tonnes: 10 million tonnes from domestic production and 10 million tonnes from imports. The discussion also covered the EU’s preference for market-based climate instruments, including the EU Emissions Trading System, and the role of the European Hydrogen Bank.
-
-The course highlighted that EU legislation does not use “green hydrogen” as a legal category. Instead, renewable hydrogen is addressed as a renewable fuel of non-biological origin, or RFNBO. The framework includes sustainability criteria such as **additionality** under Article 5 and **temporal and geographic correlation** under Article 7, which connect hydrogen production to additional renewable electricity and regulate when and where that electricity is generated.
-
-**Infrastructure carries its own environmental costs**
-
-Viktor Weber turned the discussion toward environmental impact assessment and the practical difficulty of producing hydrogen through electrolysis at an industrial scale. Denmark’s ambitions would require substantial volumes of water—a scarce resource that may need to come from desalinated seawater, treated household wastewater, rainwater or groundwater. Hydrogen production and storage also introduce safety concerns because the gas is highly explosive.
-
-These constraints complicate the idea that renewable hydrogen is environmentally uncomplicated. Replacing fossil fuels can reduce emissions while simultaneously creating new pressures on water, land, infrastructure and surrounding ecosystems.
-
-**Legal compliance is not the same as legitimacy**
-
-Yair Alpuche addressed the political and social dimensions of the energy transition through landscape analysis and the competing values attached to land. The question was captured in a simple dilemma: “wind turbines or the bats?” Renewable-energy projects may serve urgent climate objectives while conflicting with biodiversity, cultural priorities or the wishes of local communities.
-
-The seminar therefore ended with a broader ethical question: even when a large-scale energy project complies with regulation, is it right to proceed without local and cultural approval? Green hydrogen’s future will depend not only on targets, incentives and technical feasibility, but also on whether projects can earn legitimacy from the communities and landscapes expected to host them.
-
-The course formed part of the **Regulatory Innovation to Incentivize Green Hydrogen (RIGHydro)** project, hosted by the Center for Climate Change Law and Governance at the University of Copenhagen and led by Beatriz Martinez Romera.
+This seminar was part of the Regulatory Innovation to Incentivize Green Hydrogen (RIGHydro) project, hosted by the Center for Climate Change Law and Governance at the University of Copenhagen and led by Beatriz Martinez Romera.
       `,
     },
     {
