@@ -1375,7 +1375,7 @@ The last question to Martin was on Hungary’s noncompliance with Netanyahu’s 
       summary: 'The Danish Competition and Consumer Authority (DCCA) has recently begun using its new "call-in" power to require notification for mergers that fall below regular financial thresholds.',
       author: 'Lou',
       date: '2025-10-24',
-      imageUrl: 'https://freerangestock.com/sample/169061/close-up-of-yellow-and-black-road-markings.jpg',
+      imageUrl: 'https://images.unsplash.com/photo-1528819622765-d6bcf132f793?ixlib=rb-4.1.0&auto=format&fit=crop&q=80&w=2070',
       content: `On August 26th and 27th, the **Danish Competition and Consumer Authority (DCCA)** issued its first two decisions exercising their "call-in" power for mergers that fall below the thresholds of Article 12(1) of the Danish Competition Act (DCA).
 
 The recently amended [Article 12 DCA (paragraph 6)](https://en.kfst.dk/media/s4ybfdap/the-danish-competition-act-1150-af-03112024.pdf) grants the DCCA power to require notification of mergers that fall below the “regular” thresholds established in its first paragraph, when: (i) the parties’ combined Danish turnover exceeds DKK 50 million (≈ €6.5 m), and (ii) the deal risks significantly impeding effective competition. 
