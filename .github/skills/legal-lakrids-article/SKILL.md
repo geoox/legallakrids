@@ -1,7 +1,7 @@
 ---
 name: legal-lakrids-article
 description: Creates and publishes a Legal Lakrids website article from an uploaded document or pasted draft. Use when the user asks to add, create, convert, publish, or draft an article, blog post, legal update, or event recap for this repository.
-compatibility: Designed for the Legal Lakrids React repository. Requires access to src/App.jsx and the repository's existing npm scripts.
+compatibility: Designed for the Legal Lakrids React repository. Requires access to src/data/articles.js and the repository's existing npm scripts.
 metadata:
   author: Legal Lakrids
   version: "1.0"
@@ -10,9 +10,8 @@ metadata:
 # Create a Legal Lakrids article
 
 Turn the user's uploaded document or pasted content into a complete article entry in
-`src/App.jsx`. Follow the existing article model and presentation style; do not create
-a separate article file or change the renderer unless the user explicitly requests a
-refactor.
+`src/data/articles.js`. Follow the existing article model and presentation style; do
+not change the renderer unless the user explicitly requests it.
 
 ## Workflow
 
@@ -37,8 +36,9 @@ refactor.
      user explicitly asks.
    - If an attachment cannot be read, explain the blocker instead of guessing.
 
-2. Inspect the current article collection and renderer in `src/App.jsx`.
-   - Locate `const articles = useMemo(() => [`.
+2. Inspect the current article collection and renderer.
+   - Locate `export const articles = [` in `src/data/articles.js`.
+   - Read `src/pages/ArticlePage.jsx` to confirm supported body formatting.
    - Check existing IDs, author spellings, category labels, field conventions, and the
      currently supported body formatting.
    - Do not assume this skill's examples are newer than the code.
@@ -48,7 +48,7 @@ refactor.
      source has none.
    - `id`: Convert the final title to a lowercase ASCII kebab-case slug. Remove
      punctuation and diacritics, convert `&` to `and`, collapse repeated hyphens, and
-     verify that the ID is unique in `src/App.jsx`.
+     verify that the ID is unique in `src/data/articles.js`.
    - `category`: Reuse the closest existing category when appropriate. Infer a concise
      legal topic only when the source makes it unambiguous.
    - `summary`: Use the document's thumbnail summary or equivalent text exactly when

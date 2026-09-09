@@ -1,16 +1,51 @@
-# React + Vite
+# Legal Lakrids
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React and Vite website for Legal Lakrids events and legal commentary.
 
-Currently, two official plugins are available:
+## Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm ci
+npm run dev
+```
 
-## React Compiler
+Before committing changes:
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+```bash
+npm run lint
+npm run build
+```
 
-## Expanding the ESLint configuration
+## Project structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```text
+src/
+├── assets/                 Images and video bundled by Vite
+├── components/
+│   ├── layout/             Site-wide header and footer
+│   ├── sections/           Homepage sections
+│   └── ui/                 Reusable presentational components
+├── data/                   Static article and event records
+├── hooks/                  Reusable state and navigation behavior
+├── pages/                  Interior page views
+├── utils/                  Framework-independent helpers
+├── App.jsx                 Application composition root
+├── index.css               Global styles and design tokens
+└── main.jsx                React entry point
+```
+
+Keep content records in `src/data`, rendering in components or pages, and browser
+navigation behavior in `src/hooks/useSiteNavigation.js`. `App.jsx` should remain a
+small composition layer.
+
+## Deployment
+
+The production site is served from the `gh-pages` branch at
+[legallakrids.com](https://legallakrids.com). Use the
+`legal-lakrids-pages-deploy` repository skill or run:
+
+```bash
+npm run deploy
+```
+
+The command builds `dist` and publishes it through the existing `gh-pages` package.

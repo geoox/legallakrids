@@ -1,6 +1,7 @@
 # Legal Lakrids article format
 
-Articles are static JavaScript objects inside the `articles` array in `src/App.jsx`.
+Articles are static JavaScript objects inside the `articles` array in
+`src/data/articles.js`.
 The blog grid sorts them by descending `date`, while article navigation uses the string
 `id` in the hash route `#article/<id>`.
 
@@ -77,7 +78,7 @@ This is a small custom formatter, not a Markdown parser. In particular:
 
 ## Existing publication conventions
 
-- Recent commits add article objects directly to `src/App.jsx`.
+- Add article objects directly to `src/data/articles.js`.
 - New articles are normally prepended to the array.
 - Dates use `YYYY-MM-DD` and determine blog-card ordering.
 - IDs are readable lowercase kebab-case title slugs.
