@@ -198,39 +198,21 @@ p {
 }
 
 html[data-article-transition="forward"]::view-transition-old(root) {
-  animation: page-fade-out 240ms ease-out both;
+  animation: none;
+  opacity: 0;
 }
 
 html[data-article-transition="forward"]::view-transition-new(root) {
-  animation: page-enter-forward 520ms 70ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: none;
 }
 
 html[data-article-transition="back"]::view-transition-old(root) {
-  animation: page-fade-out 220ms ease-out both;
+  animation: none;
+  opacity: 0;
 }
 
 html[data-article-transition="back"]::view-transition-new(root) {
-  animation: page-enter-back 520ms 60ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes page-fade-out {
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes page-enter-forward {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-}
-
-@keyframes page-enter-back {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
+  animation: none;
 }
 
 @supports not (view-transition-name: article-image) {
