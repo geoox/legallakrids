@@ -579,16 +579,15 @@ const Events = () => {
   const events = [
     {
       title: 'TechTorget Danmark',
-      date: 'OCT 8, 2025',
+      date: '2025-10-08',
       location: '🇩🇰 Copenhagen, Denmark',
       description: 'Explore the transformative power of legal tech and AI in today\'s rapidly evolving global landscape.',
-      isPast: true,
       icon: <Icon path="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />,
       hrefLink: 'https://event.techtorget.com/techtorget-copenhagen-2025/'
     },
     {
       title: 'Google 15 Years On – Key Learnings, Antitrust Challenges, and the Road Ahead',
-      date: 'OCT 27, 2025',
+      date: '2025-10-27',
       location: '🇩🇰 Copenhagen, Denmark',
       description: 'Reflect on the key lessons learned so far about Google, antitrust, and policing abusive actions in the tech sector.',
       icon: <Icon path="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21v-1a6 6 0 00-5.197-5.803" />,
@@ -596,7 +595,7 @@ const Events = () => {
     },
     {
       title: 'Accura Open House',
-      date: 'NOV 6, 2025',
+      date: '2025-11-06',
       location: '🇩🇰 Alexandriagade 8, 2150, Nordhavn',
       description: 'Experience Accura’s innovative approach to legal services and network with industry professionals.',
       icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />,
@@ -604,7 +603,7 @@ const Events = () => {
     },
     {
       title: 'Breakfast Briefing with Martin Scheinin',
-      date: 'NOV 6, 2025',
+      date: '2025-11-06',
       location: '🇩🇰 Njalsgade 76, 2300 Copenhagen S',
       description: 'Norms, Sources and Facts in International Law: Some Reflections on Theory, Methodology and Practice',
       icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />,
@@ -612,7 +611,7 @@ const Events = () => {
     },
     {
       title: 'Course on Green Hydrogen Regulation',
-      date: 'NOV 11, 2025',
+      date: '2025-11-11',
       location: '🇩🇰 Room 8A.0.57 – Faculty of Law, University of Copenhagen',
       description: 'This hybrid course offers deep insights into the EU and Denmark’s Hydrogen laws and policies.',
       icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />,
@@ -620,7 +619,7 @@ const Events = () => {
     },
     {
       title: 'Nordic Ethics and Compliance Survey Launch',
-      date: 'NOV 25, 2025',
+      date: '2025-11-25',
       location: '🇩🇰 Axel Towers, Axel Torv 2, 1609 Copenhagen',
       description: 'Inspiration, new insights and great networking with peers in the ethics and compliance field.',
       icon: <Icon path="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75v-.008zm0 5.25h.007v.008H3.75v-.008z" />,
@@ -628,47 +627,87 @@ const Events = () => {
     },
   ];
 
+  const today = new Date();
+  const sortedEvents = events
+    .map((event) => {
+      const eventDate = new Date(`${event.date}T23:59:59`);
+      return { ...event, isPast: eventDate < today, eventDate };
+    })
+    .sort((a, b) => {
+      if (a.isPast !== b.isPast) {
+        return a.isPast ? 1 : -1;
+      }
+      return a.isPast ? b.eventDate - a.eventDate : a.eventDate - b.eventDate;
+    });
+
   return (
-    <section id="events" className="bg-white py-20 sm:py-28">
+    <section id="events" className="section-shell scroll-mt-16 py-20 sm:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Events</h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <p className="eyebrow">Meet and exchange</p>
+          <h2 className="mt-3 text-4xl font-semibold tracking-tight text-stone-950 sm:text-5xl">Events</h2>
+          <p className="mt-5 text-lg leading-relaxed text-stone-600">
             Connect with peers and gain valuable insights at legal events across Scandinavia.
           </p>
         </div>
-        <div className="mt-16 max-w-lg mx-auto sm:max-w-2xl lg:max-w-4xl space-y-8">
-          {events.map((event) => (
-            <div key={event.title} className="bg-white rounded-lg shadow-md overflow-hidden transition-shadow duration-300 hover:shadow-xl">
-              <div className="p-6 md:flex md:items-center md:justify-between">
-                <div className="md:flex-1">
-                  <div className="flex items-center">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600">
+        <div className="mx-auto mt-14 max-w-5xl space-y-5">
+          {sortedEvents.map((event) => {
+            const month = new Intl.DateTimeFormat('en', { month: 'short' })
+              .format(event.eventDate)
+              .toUpperCase();
+            const day = new Intl.DateTimeFormat('en', { day: '2-digit' })
+              .format(event.eventDate);
+            const year = event.eventDate.getFullYear();
+
+            return (
+              <article
+                key={event.title}
+                className={`premium-card overflow-hidden ${event.isPast ? 'opacity-75 hover:opacity-100' : ''}`}
+              >
+                <div className="grid gap-6 p-6 sm:grid-cols-[5rem_1fr] md:grid-cols-[5rem_1fr_auto] md:items-center md:p-7">
+                  <time
+                    dateTime={event.date}
+                    className="flex h-20 w-20 flex-col items-center justify-center rounded-2xl bg-stone-950 text-white shadow-lg"
+                  >
+                    <span className="text-[0.65rem] font-bold tracking-[0.18em] text-white/65">{month}</span>
+                    <span className="font-serif text-3xl font-semibold leading-none">{day}</span>
+                    <span className="mt-1 text-[0.65rem] text-white/65">{year}</span>
+                  </time>
+                  <div>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className={`rounded-full px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wider ${
+                        event.isPast
+                          ? 'bg-stone-200 text-stone-600'
+                          : 'bg-emerald-100 text-emerald-800'
+                      }`}>
+                        {event.isPast ? 'Past event' : 'Upcoming'}
+                      </span>
+                      <span className="text-xs text-stone-500">{event.location}</span>
+                    </div>
+                    <div className="mt-3 flex items-start gap-3">
+                      <span className="mt-1 hidden text-[#9a7441] sm:block">
                         {event.icon}
+                      </span>
+                      <div>
+                        <h3 className="text-xl font-semibold leading-snug text-stone-950">{event.title}</h3>
+                        <p className="mt-2 text-sm leading-6 text-stone-600">{event.description}</p>
                       </div>
                     </div>
-                    <div className="ml-4">
-                      <p className="text-sm font-semibold text-gray-800">{event.date}</p>
-                      <p className="text-xs text-gray-500">{event.location}</p>
-                    </div>
                   </div>
-                  <h3 className="mt-4 text-xl font-semibold text-gray-900">{event.title}</h3>
-                  <p className="mt-2 text-base text-gray-600">{event.description}</p>
-                </div>
-                <div className="mt-6 md:mt-0 md:ml-6 flex-shrink-0">
                   <a
                     href={event.hrefLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full md:w-auto inline-flex items-center justify-center px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900 transition-colors duration-300"
+                    className="primary-button w-full gap-2 md:w-auto"
+                    aria-label={`Read more about ${event.title} (opens in a new tab)`}
                   >
                     Read more
+                    <Icon path="M13.5 4.5H19.5V10.5M19 5L10 14M6.75 6.75H5.25A2.25 2.25 0 003 9V18.75A2.25 2.25 0 005.25 21H15A2.25 2.25 0 0017.25 18.75V17.25" className="h-4 w-4" />
                   </a>
                 </div>
-              </div>
-            </div>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
