@@ -46,7 +46,9 @@ const FadeInSection = ({ children }) => {
   return (
     <div
       ref={domRef}
-      className={`transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      className={`transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+      }`}
     >
       {children}
     </div>
@@ -481,12 +483,13 @@ const Hero = () => {
     const updateMotionPreference = () => setPrefersReducedMotion(motionPreference.matches);
     updateMotionPreference();
     motionPreference.addEventListener('change', updateMotionPreference);
+    return () => motionPreference.removeEventListener('change', updateMotionPreference);
+  }, []);
 
+  useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.8;
     }
-
-    return () => motionPreference.removeEventListener('change', updateMotionPreference);
   }, [prefersReducedMotion]);
 
   const fallbackImageUrl = "https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?q=80&w=2070&auto=format&fit=crop";
@@ -552,30 +555,35 @@ const Hero = () => {
 };
 
 const About = () => (
-  <section id="about" className="bg-gray-50 py-20 sm:py-28">
+  <section id="about" className="section-muted scroll-mt-16 py-20 sm:py-28">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">About Legal Lakrids</h2>
-          <p className="mt-4 text-lg text-gray-600">
+          <p className="eyebrow">Our perspective</p>
+          <h2 className="mt-3 text-4xl font-semibold tracking-tight text-stone-950 sm:text-5xl">About Legal Lakrids</h2>
+          <p className="mt-5 text-lg leading-relaxed text-stone-600">
             Your specialized partner in Scandinavian legal events and insights.
           </p>
         </div>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div className="mt-14 grid grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-16">
           <div>
             <img
-              className="rounded-lg shadow-lg object-cover w-full h-full"
+              className="aspect-[4/3] h-full w-full rounded-[1.5rem] object-cover shadow-[0_24px_60px_rgba(23,23,20,0.12)]"
               src="https://images.unsplash.com/photo-1585399058947-f68f9db58e5f?q=80&w=2070&auto=format&fit=crop"
               alt="Legal professionals collaborating on Scandinavian market movements"
+              loading="lazy"
+              decoding="async"
               onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/e2e8f0/4a5568?text=Our+Team'; }}
             />
           </div>
-          <div className="prose prose-lg text-gray-600 text-justify">
+          <div className="space-y-5 text-base leading-8 text-stone-600 sm:text-lg">
             <p>
               Founded by two EU-qualified lawyers based in Copenhagen, this is the essential platform for legal professionals looking to connect, collaborate, and critically engage with the field in Scandinavia.
-              <br /> <br />
+            </p>
+            <p>
               Born from the belief that law is best understood when it's actively discussed, our mission is to foster a space for critical commentary and analysis of legal developments and market movements.
-              <br /> <br />
+            </p>
+            <p className="font-semibold text-stone-900">
               If you have a passion for law and a desire to engage with your peers, welcome home.
             </p>
           </div>
@@ -586,22 +594,25 @@ const About = () => (
 );
 
 const Founders = () => (
-  <section id="founders" className="bg-white py-20 sm:py-28">
+  <section id="founders" className="section-shell py-20 sm:py-28">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Meet the Founders</h2>
+        <p className="eyebrow">The people behind it</p>
+        <h2 className="mt-3 text-4xl font-semibold tracking-tight text-stone-950 sm:text-5xl">Meet the Founders</h2>
         <div className="mt-16 flex flex-col md:flex-row justify-center items-center gap-12 md:gap-20">
           <div className="flex flex-col items-center">
             <a
               href="https://www.linkedin.com/in/cristina-bostean/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group cursor-pointer"
+              className="group cursor-pointer rounded-[1.5rem]"
             >
               <img
-                className="h-64 w-64 rounded-xl object-cover shadow-xl transition-all duration-300 ease-in-out transform group-hover:scale-105"
+                className="h-64 w-64 rounded-[1.5rem] object-cover shadow-[0_20px_50px_rgba(23,23,20,0.14)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:shadow-[0_26px_60px_rgba(23,23,20,0.2)]"
                 src={cristina}
                 alt="Cristina Bostean, co-founder of Legal Lakrids"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <h3 className="mt-6 text-xl font-semibold text-gray-800">Cristina Bostean</h3>
@@ -611,26 +622,26 @@ const Founders = () => (
               href="https://www.linkedin.com/in/louladoire/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group cursor-pointer"
+              className="group cursor-pointer rounded-[1.5rem]"
             >
               <img
-                className="h-64 w-64 rounded-xl object-cover shadow-xl transition-all duration-300 ease-in-out transform group-hover:scale-105"
+                className="h-64 w-64 rounded-[1.5rem] object-cover shadow-[0_20px_50px_rgba(23,23,20,0.14)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1 group-hover:shadow-[0_26px_60px_rgba(23,23,20,0.2)]"
                 src={lou}
                 alt="Lou Ladoire, co-founder of Legal Lakrids"
+                loading="lazy"
+                decoding="async"
               />
             </a>
             <h3 className="mt-6 text-xl font-semibold text-gray-800">Lou Ladoire</h3>
           </div>
         </div>
-        <div className="mt-12 max-w-4xl mx-auto text-lg text-gray-600 text-justify prose prose-lg">
+        <div className="mx-auto mt-12 max-w-3xl space-y-5 text-left text-base leading-8 text-stone-600 sm:text-lg">
           <p>
             Cristina brings a strong M&A, corporate law and banking & finance background, shaped at PwC Romania and studies at the Sorbonne and University of Bucharest.
           </p>
-          <br />
           <p>
             Lou blends expertise in competition law, international arbitration, and cross-border regulatory work, honed at Uría Menéndez and IE Law School in Spain.
           </p>
-          <br />
           <p>
             They share a strong interest in the future of law, specifically AI and tech regulation, as well as the legal challenges in highly regulated industries like logistics, energy, and pharmaceuticals.
           </p>
@@ -849,6 +860,8 @@ const Events = () => {
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formStatus, setFormStatus] = useState('');
+  const [isOpeningEmail, setIsOpeningEmail] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -860,16 +873,22 @@ const Contact = () => {
     const subject = `Contact Form Inquiry from ${name}`;
     const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
     const mailtoLink = `mailto:contact@legallakrids.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
+    setIsOpeningEmail(true);
+    setFormStatus('Opening your email app with this message…');
+    window.setTimeout(() => {
+      window.location.href = mailtoLink;
+      setIsOpeningEmail(false);
+    }, 150);
   };
 
   return (
-    <section id="contact" className="bg-gray-50 py-20 sm:py-28">
+    <section id="contact" className="section-muted scroll-mt-16 py-20 sm:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-lg mx-auto lg:max-w-none lg:grid lg:grid-cols-2 lg:gap-24">
           <div className="text-left">
-            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">Get in Touch</h2>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="eyebrow">Start a conversation</p>
+            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-stone-950 sm:text-5xl">Get in Touch</h2>
+            <p className="mt-5 text-lg leading-relaxed text-stone-600">
               We're here to help. Whether you have a question about our events, are interested in contributing an article, or have a media inquiry, please reach out.
             </p>
             <div className="mt-8 space-y-6">
@@ -896,24 +915,27 @@ const Contact = () => {
             </div>
           </div>
           <div className="mt-16 lg:mt-0">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="premium-card space-y-5 p-6 sm:p-8">
               <div>
-                <label htmlFor="name" className="sr-only">Full name</label>
-                <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required autoComplete="name" className="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md" placeholder="Full name" />
+                <label htmlFor="name" className="mb-2 block text-sm font-semibold text-stone-800">Full name</label>
+                <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required autoComplete="name" className="block min-h-12 w-full rounded-xl border border-stone-300 bg-white px-4 text-stone-950 shadow-sm transition-colors placeholder:text-stone-400 hover:border-stone-400 focus:border-[#9a7441] focus:outline-none" placeholder="Your name" />
               </div>
               <div>
-                <label htmlFor="email" className="sr-only">Email</label>
-                <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required autoComplete="email" className="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md" placeholder="Email" />
+                <label htmlFor="email" className="mb-2 block text-sm font-semibold text-stone-800">Email</label>
+                <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required autoComplete="email" className="block min-h-12 w-full rounded-xl border border-stone-300 bg-white px-4 text-stone-950 shadow-sm transition-colors placeholder:text-stone-400 hover:border-stone-400 focus:border-[#9a7441] focus:outline-none" placeholder="you@example.com" />
               </div>
               <div>
-                <label htmlFor="message" className="sr-only">Message</label>
-                <textarea id="message" name="message" rows="4" value={formData.message} onChange={handleChange} required className="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-gray-500 focus:border-gray-500 border-gray-300 rounded-md" placeholder="Message"></textarea>
+                <label htmlFor="message" className="mb-2 block text-sm font-semibold text-stone-800">Message</label>
+                <textarea id="message" name="message" rows="5" value={formData.message} onChange={handleChange} required className="block w-full resize-y rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-950 shadow-sm transition-colors placeholder:text-stone-400 hover:border-stone-400 focus:border-[#9a7441] focus:outline-none" placeholder="How can we help?"></textarea>
               </div>
               <div>
-                <button type="submit" className="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 w-full transition-colors duration-300">
-                  Send Message
+                <button type="submit" disabled={isOpeningEmail} className="primary-button w-full disabled:cursor-wait disabled:opacity-60">
+                  {isOpeningEmail ? 'Opening email…' : 'Compose email'}
                 </button>
               </div>
+              <p className="min-h-5 text-center text-sm text-stone-600" role="status" aria-live="polite">
+                {formStatus}
+              </p>
             </form>
           </div>
         </div>
@@ -1085,7 +1107,7 @@ const Footer = ({ setActiveSection, onPrivacyPolicyClick }) => {
           </div>
         </div>
         <div className="mt-12 border-t border-gray-700 pt-8">
-          <p className="text-base text-gray-400 xl:text-center">&copy; 2025 LegalLakrids.com. All rights reserved.</p>
+          <p className="text-base text-gray-400 xl:text-center">&copy; {new Date().getFullYear()} LegalLakrids.com. All rights reserved.</p>
         </div>
       </div>
     </footer>
