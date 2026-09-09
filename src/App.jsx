@@ -21,6 +21,13 @@ const formatArticleDate = (date) => new Intl.DateTimeFormat('en-GB', {
   year: 'numeric'
 }).format(new Date(`${date}T00:00:00`));
 
+const scrollInstantlyTo = (top) => {
+  const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+  document.documentElement.style.scrollBehavior = 'auto';
+  window.scrollTo(0, top);
+  document.documentElement.style.scrollBehavior = previousScrollBehavior;
+};
+
 // A component to fade in sections as they are scrolled into view
 const FadeInSection = ({ children }) => {
   const [isVisible, setVisible] = useState(false);
@@ -64,7 +71,7 @@ const ArticlePage = ({ article, onGoHome, relatedArticles, onRelatedArticleSelec
   const [shareStatus, setShareStatus] = useState('');
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    scrollInstantlyTo(0);
   }, [article]);
 
   useEffect(() => {
@@ -1376,7 +1383,7 @@ The panelists included:
     }
 
     const animationFrame = window.requestAnimationFrame(() => {
-      window.scrollTo(0, pendingScrollRestore);
+      scrollInstantlyTo(pendingScrollRestore);
       setPendingScrollRestore(null);
     });
 
@@ -1460,7 +1467,7 @@ The panelists included:
         `#article/${id}`
       );
       flushSync(() => setCurrentArticleId(id));
-      window.scrollTo(0, 0);
+      scrollInstantlyTo(0);
     };
 
     startArticleTransition('forward', id, openArticle);
@@ -1478,7 +1485,7 @@ The panelists included:
           setShowPrivacyPolicy(false);
           setPendingScrollRestore(null);
         });
-        window.scrollTo(0, homeScrollY);
+        scrollInstantlyTo(homeScrollY);
       };
 
       startArticleTransition('back', articleId, returnToArticleCard);
@@ -1503,7 +1510,7 @@ The panelists included:
         `#article/${id}`
       );
       flushSync(() => setCurrentArticleId(id));
-      window.scrollTo(0, 0);
+      scrollInstantlyTo(0);
     };
 
     startArticleTransition('forward', null, switchArticle);

@@ -185,6 +185,7 @@ p {
 
 ::view-transition-old(article-image),
 ::view-transition-new(article-image) {
+  animation: none;
   height: 100%;
   overflow: clip;
   object-fit: cover;
