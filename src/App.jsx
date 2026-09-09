@@ -131,13 +131,19 @@ const ArticlePage = ({ article, onGoHome }) => {
 
 // --- Main Section Components ---
 
-const Header = ({ setActiveSection, onGoHome, currentArticleId }) => {
+const Header = ({
+  activeSection,
+  setActiveSection,
+  onGoHome,
+  currentArticleId,
+  isInteriorPage
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (currentArticleId) {
+      if (isInteriorPage) {
         setIsScrolled(true);
         return;
       }
@@ -146,9 +152,52 @@ const Header = ({ setActiveSection, onGoHome, currentArticleId }) => {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentArticleId]);
+  }, [isInteriorPage]);
 
-  const navLinks = ["About", "Blog", "Events", "Contact"];
+  useEffect(() => {
+    if (isInteriorPage) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleSection = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleSection) {
+          setActiveSection(visibleSection.target.id);
+        }
+      },
+      { rootMargin: '-35% 0px -55% 0px', threshold: [0, 0.1, 0.5] }
+    );
+
+    ['home', 'about', 'events', 'blog', 'contact'].forEach((sectionId) => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        observer.observe(section);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, [isInteriorPage, setActiveSection]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isOpen]);
+
+  const navLinks = ["About", "Events", "Blog", "Contact"];
 
   const handleNavClick = (section) => {
     const sectionId = section.toLowerCase();
@@ -181,38 +230,66 @@ const Header = ({ setActiveSection, onGoHome, currentArticleId }) => {
     }
   };
 
-  const isOpaque = isScrolled || currentArticleId;
+  const isOpaque = isScrolled || isInteriorPage;
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isOpaque ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-500 ${
+        isOpaque
+          ? 'border-black/5 bg-[#fffdf9]/90 shadow-[0_12px_35px_rgba(23,23,20,0.07)] backdrop-blur-xl'
+          : 'border-transparent bg-transparent'
+      }`}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className={`flex items-center justify-between transition-all duration-500 ${isOpaque ? 'h-16' : 'h-20'}`}>
           <div className="flex-shrink-0">
-            <a href="#home" onClick={handleLogoClick} className="block bg-white">
-              <img src={logo} alt="Legal Lakrids Logo - Scandinavian Legal Events" className={`h-20 w-auto background-white`} />
+            <a
+              href="#home"
+              onClick={handleLogoClick}
+              className="block rounded-xl bg-white/95 px-1 shadow-sm transition-transform duration-300 hover:scale-[1.02]"
+              aria-label="Legal Lakrids home"
+            >
+              <img
+                src={logo}
+                alt=""
+                className={`w-auto transition-all duration-500 ${isOpaque ? 'h-14' : 'h-16'}`}
+              />
             </a>
           </div>
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+            <nav aria-label="Primary navigation" className="ml-10 flex items-center gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link}
                   href={`#${link.toLowerCase()}`}
                   onClick={(e) => { e.preventDefault(); handleNavClick(link); }}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isOpaque ? 'text-gray-700 hover:bg-gray-200' : 'text-gray-200 hover:bg-white hover:bg-opacity-20 hover:text-gray-700'}`}
+                  aria-current={activeSection === link.toLowerCase() ? 'location' : undefined}
+                  className={`relative rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+                    isOpaque
+                      ? 'text-stone-700 hover:bg-stone-100 hover:text-stone-950'
+                      : 'text-white/85 hover:bg-white/10 hover:text-white'
+                  } ${
+                    activeSection === link.toLowerCase()
+                      ? 'after:absolute after:inset-x-4 after:-bottom-0.5 after:h-px after:bg-[#b48a55]'
+                      : ''
+                  }`}
                 >
                   {link}
                 </a>
               ))}
-            </div>
+            </nav>
           </div>
           <div className="-mr-2 flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className={`inline-flex items-center justify-center p-2 rounded-md focus:outline-none transition-colors ${isOpaque ? 'text-gray-800 hover:bg-gray-200' : 'text-white hover:bg-white hover:bg-opacity-20'}`}
+              className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full transition-colors ${
+                isOpaque
+                  ? 'text-stone-900 hover:bg-stone-100'
+                  : 'text-white hover:bg-white/10'
+              }`}
               aria-controls="mobile-menu"
-              aria-expanded="false"
+              aria-expanded={isOpen}
             >
               <span className="sr-only">Open main menu</span>
               <Icon path={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} className="h-6 w-6" />
@@ -221,22 +298,37 @@ const Header = ({ setActiveSection, onGoHome, currentArticleId }) => {
         </div>
       </div>
 
-      {isOpen && (
-        <div className="md:hidden" id="mobile-menu">
-          <div className={`px-2 pt-2 pb-3 space-y-1 sm:px-3 ${isOpaque ? 'bg-white' : 'bg-gray-800 bg-opacity-90'}`}>
+      <div
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out md:hidden ${
+          isOpen ? 'grid-rows-[1fr] opacity-100' : 'pointer-events-none grid-rows-[0fr] opacity-0'
+        }`}
+        id="mobile-menu"
+        aria-hidden={!isOpen}
+      >
+        <div className="overflow-hidden">
+          <nav
+            aria-label="Mobile navigation"
+            className="mx-3 mb-3 space-y-1 rounded-2xl border border-black/5 bg-[#fffdf9]/95 p-2 shadow-xl backdrop-blur-xl"
+          >
             {navLinks.map((link) => (
               <a
                 key={link}
                 href={`#${link.toLowerCase()}`}
                 onClick={(e) => { e.preventDefault(); handleNavClick(link); }}
-                className={`block px-3 py-2 rounded-md text-base font-medium ${isOpaque ? 'text-gray-700 hover:bg-gray-200' : 'text-gray-200 hover:bg-gray-700'}`}
+                tabIndex={isOpen ? 0 : -1}
+                aria-current={activeSection === link.toLowerCase() ? 'location' : undefined}
+                className={`block rounded-xl px-4 py-3 text-base font-semibold transition-colors ${
+                  activeSection === link.toLowerCase()
+                    ? 'bg-stone-900 text-white'
+                    : 'text-stone-700 hover:bg-stone-100 hover:text-stone-950'
+                }`}
               >
                 {link}
               </a>
             ))}
-          </div>
+          </nav>
         </div>
-      )}
+      </div>
     </header>
   );
 };
@@ -773,7 +865,6 @@ const Footer = ({ setActiveSection, onPrivacyPolicyClick }) => {
 // --- Main App Component ---
 
 export default function App() {
-  // eslint-disable-next-line no-unused-vars
   const [activeSection, setActiveSection] = useState('home');
   const [currentArticleId, setCurrentArticleId] = useState(null);
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
@@ -1160,9 +1251,11 @@ The panelists included:
   return (
     <div className="bg-white">
       <Header
+        activeSection={activeSection}
         setActiveSection={setActiveSection}
         onGoHome={handleGoHome}
         currentArticleId={currentArticleId}
+        isInteriorPage={Boolean(currentArticleId || showPrivacyPolicy)}
       />
       <main>
         {showPrivacyPolicy ? (
