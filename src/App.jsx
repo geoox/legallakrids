@@ -163,8 +163,8 @@ const ArticlePage = ({ article, onGoHome, relatedArticles, onRelatedArticleSelec
           style={{ transform: `scaleX(${readingProgress})` }}
         ></div>
       </div>
-      <div className="section-shell min-h-screen pt-24">
-        <div className="container mx-auto px-4 py-10 sm:px-6 md:py-14 lg:px-8">
+      <div className="section-shell min-h-screen pt-16">
+        <div className="container mx-auto px-4 pb-10 pt-6 sm:px-6 md:pb-14 md:pt-8 lg:px-8">
           <div className="mx-auto max-w-5xl pb-20">
             <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
               <button
