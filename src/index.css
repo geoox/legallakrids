@@ -1,11 +1,134 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lora:wght@700&family=Poppins:wght@700&family=Source+Sans+Pro:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
-/* You can also set a default body font here */
+:root {
+  --color-canvas: #f8f6f1;
+  --color-surface: #fffdf9;
+  --color-surface-muted: #f0ece4;
+  --color-ink: #171714;
+  --color-ink-soft: #5d5a53;
+  --color-line: #ded8cd;
+  --color-accent: #9a7441;
+  --color-accent-dark: #72512a;
+  --shadow-soft: 0 18px 50px rgba(34, 29, 21, 0.08);
+  --shadow-lifted: 0 24px 65px rgba(34, 29, 21, 0.14);
+  --radius-card: 1.25rem;
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-canvas);
+}
+
 body {
-  font-family: 'Inter', sans-serif; /* Example: Sets Inter as the default */
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+.editorial-title {
+  font-family: 'Lora', serif;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: rgba(154, 116, 65, 0.22);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(154, 116, 65, 0.7);
+  outline-offset: 4px;
+}
+
+.section-shell {
+  background: var(--color-surface);
+}
+
+.section-muted {
+  background: var(--color-canvas);
+}
+
+.eyebrow {
+  color: var(--color-accent-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.premium-card {
+  border: 1px solid rgba(222, 216, 205, 0.78);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 400ms var(--ease-premium),
+    box-shadow 400ms var(--ease-premium),
+    border-color 400ms ease;
+}
+
+.premium-card:hover,
+.premium-card:focus-within {
+  border-color: rgba(154, 116, 65, 0.35);
+  box-shadow: var(--shadow-lifted);
+  transform: translateY(-4px);
+}
+
+.primary-button,
+.secondary-button {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition:
+    transform 250ms var(--ease-premium),
+    background-color 250ms ease,
+    border-color 250ms ease,
+    color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.primary-button {
+  background: var(--color-ink);
+  color: white;
+  box-shadow: 0 10px 30px rgba(23, 23, 20, 0.22);
+}
+
+.primary-button:hover {
+  background: #2d2b26;
+  box-shadow: 0 14px 36px rgba(23, 23, 20, 0.28);
+  transform: translateY(-2px);
+}
+
+.secondary-button {
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.secondary-button:hover {
+  border-color: white;
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
 }
 
 ::view-transition-group(article-image) {
@@ -81,6 +204,17 @@ html[data-article-transition="back"]::view-transition-new(root) {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
   ::view-transition-group(article-image),
   ::view-transition-old(root),
   ::view-transition-new(root),
