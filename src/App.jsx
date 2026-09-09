@@ -742,6 +742,8 @@ const Blog = ({ articles, onArticleSelect, transitioningArticleId }) => {
 };
 
 const Events = () => {
+  const [eventFilter, setEventFilter] = useState('upcoming');
+  const [showAllEvents, setShowAllEvents] = useState(false);
   const events = [
     {
       title: 'CAD - Copenhagen Arbitration Days',
@@ -889,6 +891,15 @@ const Events = () => {
       }
       return a.isPast ? b.eventDate - a.eventDate : a.eventDate - b.eventDate;
     });
+  const upcomingEvents = sortedEvents.filter((event) => !event.isPast);
+  const pastEvents = sortedEvents.filter((event) => event.isPast);
+  const filteredEvents = eventFilter === 'upcoming' ? upcomingEvents : pastEvents;
+  const visibleEvents = showAllEvents ? filteredEvents : filteredEvents.slice(0, 4);
+
+  const changeEventFilter = (filter) => {
+    setEventFilter(filter);
+    setShowAllEvents(false);
+  };
 
   return (
     <section id="events" className="section-shell scroll-mt-20 py-20 sm:py-28">
@@ -900,8 +911,31 @@ const Events = () => {
             Connect with peers and gain valuable insights at legal events across Scandinavia.
           </p>
         </div>
+        <div className="mx-auto mt-10 flex max-w-max rounded-full border border-stone-200 bg-stone-100 p-1" role="group" aria-label="Filter events">
+          {[
+            { id: 'upcoming', label: 'Upcoming', count: upcomingEvents.length },
+            { id: 'past', label: 'Past', count: pastEvents.length }
+          ].map((filter) => (
+            <button
+              key={filter.id}
+              type="button"
+              onClick={() => changeEventFilter(filter.id)}
+              aria-pressed={eventFilter === filter.id}
+              className={`min-h-11 rounded-full px-5 text-sm font-semibold transition-all duration-300 ${
+                eventFilter === filter.id
+                  ? 'bg-stone-950 text-white shadow-md'
+                  : 'text-stone-600 hover:bg-white hover:text-stone-950'
+              }`}
+            >
+              {filter.label}
+              <span className={`ml-2 text-xs ${eventFilter === filter.id ? 'text-white/60' : 'text-stone-400'}`}>
+                {filter.count}
+              </span>
+            </button>
+          ))}
+        </div>
         <div className="mx-auto mt-14 max-w-5xl space-y-5">
-          {sortedEvents.map((event) => {
+          {visibleEvents.map((event) => {
             const month = new Intl.DateTimeFormat('en', { month: 'short' })
               .format(event.eventDate)
               .toUpperCase();
@@ -970,6 +1004,24 @@ const Events = () => {
             );
           })}
         </div>
+        {filteredEvents.length > 4 && (
+          <div className="mt-9 text-center">
+            <button
+              type="button"
+              onClick={() => setShowAllEvents((isShowingAll) => !isShowingAll)}
+              className="inline-flex min-h-11 items-center rounded-full border border-stone-300 bg-white px-5 text-sm font-semibold text-stone-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-stone-400 hover:shadow-md"
+              aria-expanded={showAllEvents}
+            >
+              {showAllEvents
+                ? 'Show fewer events'
+                : `Show all ${filteredEvents.length} ${eventFilter} events`}
+              <Icon
+                path={showAllEvents ? 'M19.5 15l-7.5-7.5L4.5 15' : 'M4.5 9l7.5 7.5L19.5 9'}
+                className="ml-2 h-4 w-4"
+              />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
