@@ -175,12 +175,16 @@ p {
 
 ::view-transition-group(article-image) {
   z-index: 10;
+  overflow: clip;
+  border-radius: 1.5rem;
   animation-duration: 650ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 ::view-transition-image-pair(article-image) {
   isolation: auto;
+  overflow: clip;
+  border-radius: 1.5rem;
 }
 
 ::view-transition-old(article-image),
@@ -188,6 +192,7 @@ p {
   animation: none;
   height: 100%;
   overflow: clip;
+  border-radius: 1.5rem;
   object-fit: cover;
   mix-blend-mode: normal;
 }
