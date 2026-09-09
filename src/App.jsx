@@ -674,7 +674,7 @@ const Blog = ({ articles, onArticleSelect, transitioningArticleId }) => {
             >
               <div className="relative aspect-[16/10] flex-shrink-0 overflow-hidden bg-stone-200">
                 <img
-                  className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.035]"
+                  className="h-full w-full transform object-cover transition-transform duration-300 group-hover:scale-105"
                   src={article.imageUrl}
                   alt={article.title}
                   style={{ viewTransitionName: transitioningArticleId === article.id ? 'article-image' : 'none' }}
@@ -682,7 +682,6 @@ const Blog = ({ articles, onArticleSelect, transitioningArticleId }) => {
                   decoding="async"
                   onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/600x400/e2e8f0/4a5568?text=${article.category}`; }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
               </div>
               <div className="flex flex-1 flex-col justify-between p-6">
                 <div>
