@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { flushSync } from 'react-dom';
 import heroVideo from './assets/videos/hero-video.mp4';
 import logo from './assets/images/logo.png';
 import lou from './assets/images/lou.jpeg';
@@ -87,7 +88,7 @@ const ArticlePage = ({ article, onGoHome }) => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-4">
           <div className="max-w-4xl mx-auto pb-16">
             <button
-              onClick={onGoHome}
+              onClick={() => onGoHome()}
               className="mb-8 cursor-pointer inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors font-medium"
             >
               <Icon path="M10 19l-7-7m0 0l7-7m-7 7h18" className="h-5 w-5 mr-2" />
@@ -102,7 +103,8 @@ const ArticlePage = ({ article, onGoHome }) => {
               <img
                 src={article.imageUrl}
                 alt={article.title}
-                className="w-full h-auto max-h-[500px] object-cover rounded-lg shadow-lg mb-12"
+                className="article-hero-image w-full h-auto max-h-[500px] object-cover rounded-lg shadow-lg mb-12"
+                style={{ viewTransitionName: article.isTransitioning ? 'article-image' : 'none' }}
                 onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/1200x600/e2e8f0/4a5568?text=Image+Not+Found`; }}
               />
               <div
@@ -159,7 +161,7 @@ const Header = ({ setActiveSection, onGoHome, currentArticleId }) => {
     };
 
     if (currentArticleId) {
-      onGoHome();
+      onGoHome({ restoreScroll: false });
       setTimeout(scrollToSection, 100);
     } else {
       scrollToSection();
@@ -172,7 +174,8 @@ const Header = ({ setActiveSection, onGoHome, currentArticleId }) => {
   const handleLogoClick = (e) => {
     e.preventDefault();
     if (currentArticleId) {
-      onGoHome();
+      onGoHome({ restoreScroll: false });
+      setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
     } else {
       handleNavClick('home');
     }
@@ -372,7 +375,7 @@ const Founders = () => (
   </section>
 );
 
-const Blog = ({ articles, onArticleSelect }) => {
+const Blog = ({ articles, onArticleSelect, transitioningArticleId }) => {
   return (
     <section id="blog" className="bg-gray-50 py-20 sm:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -393,6 +396,7 @@ const Blog = ({ articles, onArticleSelect }) => {
                 <img className="h-48 w-full object-cover transform group-hover:scale-105 transition-transform duration-300"
                   src={article.imageUrl}
                   alt={article.title}
+                  style={{ viewTransitionName: transitioningArticleId === article.id ? 'article-image' : 'none' }}
                   onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/600x400/e2e8f0/4a5568?text=${article.category}`; }}
                 />
               </div>
@@ -772,6 +776,9 @@ export default function App() {
   // eslint-disable-next-line no-unused-vars
   const [activeSection, setActiveSection] = useState('home');
   const [currentArticleId, setCurrentArticleId] = useState(null);
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  const [pendingScrollRestore, setPendingScrollRestore] = useState(null);
+  const [transitioningArticleId, setTransitioningArticleId] = useState(null);
 
   // Memoize articles to prevent unnecessary re-renders
   const articles = useMemo(() => [
@@ -1004,6 +1011,27 @@ The panelists included:
     }
   ], []); // Empty dependency array since articles are static
 
+  useEffect(() => {
+    const previousScrollRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = 'manual';
+    return () => {
+      window.history.scrollRestoration = previousScrollRestoration;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (currentArticleId || showPrivacyPolicy || pendingScrollRestore === null) {
+      return;
+    }
+
+    const animationFrame = window.requestAnimationFrame(() => {
+      window.scrollTo(0, pendingScrollRestore);
+      setPendingScrollRestore(null);
+    });
+
+    return () => window.cancelAnimationFrame(animationFrame);
+  }, [currentArticleId, pendingScrollRestore, showPrivacyPolicy]);
+
   // Handle deep linking on page load and URL changes
   useEffect(() => {
     const handleLocationChange = () => {
@@ -1023,6 +1051,10 @@ The panelists included:
       } else {
         setCurrentArticleId(null);
         setShowPrivacyPolicy(false);
+        const savedScrollPosition = window.history.state?.homeScrollY;
+        if (Number.isFinite(savedScrollPosition)) {
+          setPendingScrollRestore(savedScrollPosition);
+        }
       }
     };
 
@@ -1031,23 +1063,89 @@ The panelists included:
 
     // Listen for hash changes
     window.addEventListener('hashchange', handleLocationChange);
-    return () => window.removeEventListener('hashchange', handleLocationChange);
+    window.addEventListener('popstate', handleLocationChange);
+    return () => {
+      window.removeEventListener('hashchange', handleLocationChange);
+      window.removeEventListener('popstate', handleLocationChange);
+    };
   }, [articles]); // Add articles as dependency since we use it in the effect
 
+  const startArticleTransition = (direction, articleId, update) => {
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    if (!document.startViewTransition || prefersReducedMotion) {
+      update();
+      return;
+    }
+
+    flushSync(() => setTransitioningArticleId(articleId));
+    document.documentElement.dataset.articleTransition = direction;
+
+    const transition = document.startViewTransition(update);
+    const cleanUpTransition = () => {
+      delete document.documentElement.dataset.articleTransition;
+      setTransitioningArticleId(null);
+    };
+    transition.finished.then(cleanUpTransition, cleanUpTransition);
+  };
+
   const handleArticleSelect = (id) => {
-    setCurrentArticleId(id);
-    // Use replaceState instead of pushState to ensure consistent behavior
-    window.history.replaceState(null, '', `#article/${id}`);
+    const homeScrollY = window.scrollY;
+
+    const openArticle = () => {
+      window.history.replaceState(
+        { ...window.history.state, homeScrollY },
+        '',
+        window.location.href
+      );
+      window.history.pushState(
+        { view: 'article', fromHome: true, homeScrollY },
+        '',
+        `#article/${id}`
+      );
+      flushSync(() => setCurrentArticleId(id));
+      window.scrollTo(0, 0);
+    };
+
+    startArticleTransition('forward', id, openArticle);
   };
 
-  const handleGoHome = () => {
+  const handleGoHome = ({ restoreScroll = true } = {}) => {
+    if (restoreScroll && window.history.state?.fromHome) {
+      const articleId = currentArticleId;
+      const homeScrollY = window.history.state.homeScrollY;
+
+      const returnToArticleCard = () => {
+        window.history.back();
+        flushSync(() => {
+          setCurrentArticleId(null);
+          setShowPrivacyPolicy(false);
+          setPendingScrollRestore(null);
+        });
+        window.scrollTo(0, homeScrollY);
+      };
+
+      startArticleTransition('back', articleId, returnToArticleCard);
+      return;
+    }
+
+    setPendingScrollRestore(null);
     setCurrentArticleId(null);
-    window.history.pushState(null, '', window.location.pathname);
+    window.history.replaceState(
+      { view: 'home' },
+      '',
+      window.location.pathname
+    );
   };
 
-  const selectedArticle = currentArticleId ? articles.find(a => a.id === currentArticleId) : null;
-
-  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  const selectedArticle = currentArticleId
+    ? {
+        ...articles.find(a => a.id === currentArticleId),
+        isTransitioning: transitioningArticleId === currentArticleId
+      }
+    : null;
 
   const handlePrivacyPolicyClick = () => {
     setShowPrivacyPolicy(true);
@@ -1080,7 +1178,13 @@ The panelists included:
             <Hero />
             <FadeInSection><About /></FadeInSection>
             <FadeInSection><Events /></FadeInSection>
-            <FadeInSection><Blog articles={articles} onArticleSelect={handleArticleSelect} /></FadeInSection>
+            <FadeInSection>
+              <Blog
+                articles={articles}
+                onArticleSelect={handleArticleSelect}
+                transitioningArticleId={transitioningArticleId}
+              />
+            </FadeInSection>
             <FadeInSection><Founders /></FadeInSection>
             <FadeInSection><Contact /></FadeInSection>
           </>

@@ -7,3 +7,84 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+::view-transition-group(article-image) {
+  z-index: 10;
+  animation-duration: 650ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-image-pair(article-image) {
+  isolation: auto;
+}
+
+::view-transition-old(article-image),
+::view-transition-new(article-image) {
+  height: 100%;
+  overflow: clip;
+  object-fit: cover;
+  mix-blend-mode: normal;
+}
+
+html[data-article-transition="forward"]::view-transition-old(root) {
+  animation: page-fade-out 240ms ease-out both;
+}
+
+html[data-article-transition="forward"]::view-transition-new(root) {
+  animation: page-enter-forward 520ms 70ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-article-transition="back"]::view-transition-old(root) {
+  animation: page-fade-out 220ms ease-out both;
+}
+
+html[data-article-transition="back"]::view-transition-new(root) {
+  animation: page-enter-back 520ms 60ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-enter-forward {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes page-enter-back {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@supports not (view-transition-name: article-image) {
+  .article-hero-image {
+    animation: article-image-enter 400ms ease-out both;
+  }
+
+  @keyframes article-image-enter {
+    from {
+      opacity: 0;
+      transform: scale(0.985);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(article-image),
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  .article-hero-image {
+    animation-duration: 0.01ms;
+  }
+}
