@@ -554,7 +554,7 @@ const Hero = () => {
 };
 
 const About = () => (
-  <section id="about" className="section-muted scroll-mt-16 py-20 sm:py-28">
+  <section id="about" className="section-muted scroll-mt-20 py-20 sm:py-28">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="text-center">
@@ -652,7 +652,7 @@ const Founders = () => (
 
 const Blog = ({ articles, onArticleSelect, transitioningArticleId }) => {
   return (
-    <section id="blog" className="section-muted scroll-mt-16 py-20 sm:py-28">
+    <section id="blog" className="section-muted scroll-mt-20 py-20 sm:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto">
           <p className="eyebrow">Ideas and analysis</p>
@@ -783,7 +783,7 @@ const Events = () => {
     });
 
   return (
-    <section id="events" className="section-shell scroll-mt-16 py-20 sm:py-28">
+    <section id="events" className="section-shell scroll-mt-20 py-20 sm:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto">
           <p className="eyebrow">Meet and exchange</p>
@@ -881,7 +881,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section-muted scroll-mt-16 py-20 sm:py-28">
+    <section id="contact" className="section-muted scroll-mt-20 py-20 sm:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-lg mx-auto lg:max-w-none lg:grid lg:grid-cols-2 lg:gap-24">
           <div className="text-left">
@@ -1386,7 +1386,7 @@ The panelists included:
 
   // Handle deep linking on page load and URL changes
   useEffect(() => {
-    const handleLocationChange = () => {
+    const handleLocationChange = (event) => {
       const hash = window.location.hash;
       if (hash.startsWith('#article/')) {
         const articlePath = hash.replace('#article/', '');
@@ -1404,7 +1404,10 @@ The panelists included:
         setCurrentArticleId(null);
         setShowPrivacyPolicy(false);
         const savedScrollPosition = window.history.state?.homeScrollY;
-        if (Number.isFinite(savedScrollPosition)) {
+        if (
+          Number.isFinite(savedScrollPosition) &&
+          (!event || event.type === 'popstate')
+        ) {
           setPendingScrollRestore(savedScrollPosition);
         }
       }
