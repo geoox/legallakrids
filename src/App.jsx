@@ -919,11 +919,11 @@ export default function App() {
       content: `
       The event brought together environmental engineers, industry and landscape planning experts to critically discuss green hydrogen regulation within the EU’s current energy strategy, and its challenges in Denmark specifically.
 
-While green hydrogen is often portrayed as a silver bullet for decarbonisation, it also faces major barriers to deployment. High costs, lack of infrastructure, and the absence of a natural demand-side market, but also a weak regulatory framework to support it. Only recently was green hydrogen acquired a legal definition as part of RFNBOs (Renewable Fuels of Non-Biological Origin), introduced by RED II (Renewable Energy Directive II), with its additional sustainability criteria of additionality (Article 5) and temporal and geographic correlation (Article 7). While green hydrogen avoids fossil fuels, it introduces new resource challenges, particularly around water use.
+While green hydrogen is often portrayed as a silver bullet for decarbonisation, it also faces major barriers to deployment. High costs, lack of infrastructure, and the absence of a natural demand-side market, but also a weak regulatory framework to support it. Only recently was green hydrogen acquired a legal definition as part of RFNBOs (Renewable Fuels of Non-Biological Origin), introduced by [RED II (Renewable Energy Directive II)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2018.328.01.0082.01.ENG&toc=OJ:L:2018:328:TOC), with its additional sustainability criteria of additionality (Article 5) and temporal and geographic correlation (Article 7). While green hydrogen avoids fossil fuels, it introduces new resource challenges, particularly around water use.
 
-The experts also raised the ethical question of whether regulation-compliant large-scale energy infrastructure projects should proceed despite lacking legitimacy from the local community (“Wind turbines or the bats?” ).
+The experts also raised the ethical question of whether regulation-compliant large-scale energy infrastructure projects should proceed despite lacking legitimacy from the local community ([“Wind turbines or the bats?”](https://maritime-executive.com/article/counting-bats-and-uncertain-permits-puts-danish-wind-farm-on-hold) ).
 
-This seminar was part of the Regulatory Innovation to Incentivize Green Hydrogen (RIGHydro) project, hosted by the Center for Climate Change Law and Governance at the University of Copenhagen and led by Beatriz Martinez Romera.
+This seminar was part of the [Regulatory Innovation to Incentivize Green Hydrogen (RIGHydro)](https://jura.ku.dk/clima/research/righydro/) project, hosted by the Center for Climate Change Law and Governance at the University of Copenhagen and led by Beatriz Martinez Romera.
       `,
     },
     {

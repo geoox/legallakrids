@@ -18,6 +18,10 @@ refactor.
 
 1. Read the complete source material before editing.
    - Treat the uploaded or pasted text as the factual source of truth.
+   - For rich-text formats such as DOCX, do not rely on plain-text extraction alone.
+     Inspect the document's hyperlink relationships and map every linked text run in the
+     selected article body to its target URL. For DOCX files, this means reading both
+     `word/document.xml` and `word/_rels/document.xml.rels`.
    - Identify the exact article-body boundaries established by the document. Documents
      may also contain metadata, speaker/contact lines, social-media drafts, hashtags,
      event listings, working notes, or outlines; none of those are article content
@@ -26,8 +30,8 @@ refactor.
      copy only that body. For example, if publishable paragraphs appear below a
      “speakers” line and before “notes,” use those paragraphs verbatim and exclude both
      boundary sections.
-   - Preserve names, organizations, dates, figures, quotations, legal citations, and
-     conclusions.
+   - Preserve names, organizations, dates, figures, quotations, legal citations,
+     conclusions, and every hyperlink attached to text within the selected body.
    - Do not add facts, sources, examples, headings, introductions, transitions,
      conclusions, commentary, or analysis. Only research or expand the body when the
      user explicitly asks.
@@ -65,7 +69,8 @@ refactor.
      precision, and level of detail, even when an alternative phrasing seems better.
    - Do not derive article prose from notes or outlines.
    - Make only the mechanical escaping and paragraph-separation changes required to
-     store the text safely in the JavaScript template literal.
+     store the text safely in the JavaScript template literal, plus the Markdown link
+     syntax required to retain source hyperlinks.
    - If the user requests editorial changes, apply only the specifically requested
      changes and identify them in the completion response.
 
@@ -94,8 +99,10 @@ refactor.
    - Confirm the ID is non-empty, kebab-case, and unique.
    - Confirm the date is a real ISO date and the image URL uses HTTPS.
    - Confirm all six metadata values are present and `content` is non-empty.
-   - Confirm every source URL survived conversion and parentheses in URLs were not
-     truncated by the simple link renderer.
+   - Compare the rich-text source relationships with the final article and confirm every
+     hyperlink whose linked text falls inside the selected body survived conversion.
+     Do not count links from excluded metadata, speaker, social-media, or notes sections.
+   - Confirm parentheses in URLs were not truncated by the simple link renderer.
    - Run `npm run lint` and `npm run build`.
    - Review the diff to ensure only the intended article and skill-related files changed.
 
