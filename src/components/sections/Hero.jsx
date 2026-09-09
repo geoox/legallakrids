@@ -42,6 +42,12 @@ export const Hero = () => {
   const fallbackImageUrl = "https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?q=80&w=2070&auto=format&fit=crop";
   const saveDataEnabled = navigator.connection?.saveData ?? false;
   const shouldShowVideo = !videoError && !prefersReducedMotion && !saveDataEnabled;
+  const handleSectionLink = (event) => {
+    event.preventDefault();
+    document.querySelector(event.currentTarget.hash)?.scrollIntoView({
+      behavior: prefersReducedMotion ? 'auto' : 'smooth'
+    });
+  };
 
   return (
     <section
@@ -79,18 +85,20 @@ export const Hero = () => {
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             href="#blog"
+            onClick={handleSectionLink}
             className="inline-flex min-h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-bold text-stone-950 shadow-[0_16px_40px_rgba(0,0,0,0.24)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f8f6f1] hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
           >
             Explore articles
             <Icon path="M17.25 6.75L21 10.5m0 0l-3.75 3.75M21 10.5H3" className="ml-2 h-4 w-4" />
           </a>
-          <a href="#events" className="secondary-button">
+          <a href="#events" onClick={handleSectionLink} className="secondary-button">
             View events
           </a>
         </div>
       </div>
       <a
         href="#about"
+        onClick={handleSectionLink}
         className="absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/60 transition-colors hover:text-white"
         aria-label="Scroll to learn more about Legal Lakrids"
       >
