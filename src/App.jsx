@@ -275,7 +275,6 @@ const Header = ({
   activeSection,
   setActiveSection,
   onGoHome,
-  currentArticleId,
   isInteriorPage
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -349,7 +348,7 @@ const Header = ({
       }
     };
 
-    if (currentArticleId) {
+    if (isInteriorPage) {
       onGoHome({ restoreScroll: false });
       setTimeout(scrollToSection, 100);
     } else {
@@ -362,7 +361,7 @@ const Header = ({
 
   const handleLogoClick = (e) => {
     e.preventDefault();
-    if (currentArticleId) {
+    if (isInteriorPage) {
       onGoHome({ restoreScroll: false });
       setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
     } else {
@@ -1045,13 +1044,23 @@ const PrivacyPolicyPage = ({ onGoHome }) => {
   );
 };
 
-const Footer = ({ setActiveSection, onPrivacyPolicyClick }) => {
+const Footer = ({ setActiveSection, onPrivacyPolicyClick, onGoHome, isInteriorPage }) => {
   const handleNavClick = (section) => {
-    const element = document.getElementById(section);
-    if (element) {
-      setActiveSection(section);
-      element.scrollIntoView({ behavior: 'smooth' });
+    const scrollToSection = () => {
+      const element = document.getElementById(section);
+      if (element) {
+        setActiveSection(section);
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    if (isInteriorPage) {
+      onGoHome({ restoreScroll: false });
+      setTimeout(scrollToSection, 100);
+      return;
     }
+
+    scrollToSection();
   };
 
   return (
@@ -1476,6 +1485,7 @@ The panelists included:
 
     setPendingScrollRestore(null);
     setCurrentArticleId(null);
+    setShowPrivacyPolicy(false);
     window.history.replaceState(
       { view: 'home' },
       '',
@@ -1530,7 +1540,6 @@ The panelists included:
         activeSection={activeSection}
         setActiveSection={setActiveSection}
         onGoHome={handleGoHome}
-        currentArticleId={currentArticleId}
         isInteriorPage={Boolean(currentArticleId || showPrivacyPolicy)}
       />
       <main>
@@ -1564,7 +1573,12 @@ The panelists included:
           </>
         )}
       </main>
-      <Footer setActiveSection={setActiveSection} onPrivacyPolicyClick={handlePrivacyPolicyClick} />
+      <Footer
+        setActiveSection={setActiveSection}
+        onPrivacyPolicyClick={handlePrivacyPolicyClick}
+        onGoHome={handleGoHome}
+        isInteriorPage={Boolean(currentArticleId || showPrivacyPolicy)}
+      />
     </div>
   )
 }
